@@ -26,7 +26,12 @@ const meetingModel = mongoose.Schema({
         resolution: {
             type: String
         },
-    }]
+    }],
+    upcoming: {
+        type: Boolean,
+        default: true
+    }
+
 }, {
     timestamps: true
 })
