@@ -22,4 +22,4 @@ const constributionModel = mongoose.Schema({
     timestamps: true
 })
 
-export default mongoose.model('Contribution', constributionModel)
+export default mongoose.models.Contribution || mongoose.model('Contribution', constributionModel)

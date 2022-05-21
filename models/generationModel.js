@@ -17,4 +17,4 @@ const generationSchema = mongoose.Schema({
     timestamps: true
 })
 
-export default mongoose.model('Generation', generationSchema)
+export default mongoose.models.Generation || mongoose.model('Generation', generationSchema)

@@ -3,6 +3,8 @@ import dbConnect from '../../../db/connect'
 
 const handler = async (req, res) => {
     const {method} = req
+    console.log({method})
+    console.log(req.body)
 
     await dbConnect()
 
@@ -17,10 +19,11 @@ const handler = async (req, res) => {
             break;
         case 'POST':
             try {
-                const generation = await Generation.create(req.body)
+                const gen = new Generation(req.body)
+                const generation = await gen.save()
                 res.status(201).json({success: true, data: generation})
             } catch (error) {
-                res.status(400).json({success: false, message: error.message})
+                res.status(400).json({success: false, message: error.response.data})
             }
             break;
     

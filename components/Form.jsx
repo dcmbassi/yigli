@@ -18,7 +18,7 @@ const Form = () => {
                 absenteeFee
             }
 
-            const {data} = await axios.post('/api/generations', body)
+            const {data} = await axios.post('/api/generations', body, {headers: {'Content-Type': 'application/json'}})
             console.log(data);
         }
     }

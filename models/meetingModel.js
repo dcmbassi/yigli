@@ -31,4 +31,4 @@ const meetingModel = mongoose.Schema({
     timestamps: true
 })
 
-export default mongoose.model('Meeting', meetingModel)
+export default mongoose.models.Meeting || mongoose.model('Meeting', meetingModel)

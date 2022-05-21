@@ -40,4 +40,4 @@ const memberModel = mongoose.Schema({
     timestamps: true
 })
 
-export default mongoose.model('Member', memberModel)
+export default mongoose.models.Member || mongoose.model('Member', memberModel)
