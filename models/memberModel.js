@@ -20,6 +20,10 @@ const memberModel = mongoose.Schema({
     address: {
         type: String
     },
+    sex: {
+        type: String,
+        enum: ['female', 'male']
+    },
     generation: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Generation'
