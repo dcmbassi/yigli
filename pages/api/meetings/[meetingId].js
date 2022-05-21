@@ -1,16 +1,16 @@
-import Member from '../../../models/memberModel'
+import Meeting from '../../../models/meetingModel'
 import dbConnect from '../../../db/connect'
 
 const handler = async (req, res) => {
-    const { query: {memberId}, method} = req
+    const { query: {meetingId}, method} = req
 
     await dbConnect()
 
     switch (method) {
         case 'GET':
             try {
-                const member = await Member.findById(memberId)
-                res.status(200).json({success: true, data: member})
+                const meeting = await Meeting.findById(meetingId)
+                res.status(200).json({success: true, data: meeting})
             } catch (error) {
                 res.status(400).json({success: false, message: error.message})
             }
@@ -18,9 +18,9 @@ const handler = async (req, res) => {
 
         case 'PUT':
             try {
-                const member = await Member.findByIdAndUpdate(memberId,req.body, {new: true, runValidators: true})
-                if (!member) return res.status(400).json({success: false, message: `Unable to find member with id ${memberId}`})
-                res.status(201).json({success: true, data: member})
+                const meeting = await Meeting.findByIdAndUpdate(meetingId,req.body, {new: true, runValidators: true})
+                if (!meeting) return res.status(400).json({success: false, message: `Unable to find meeting with id ${meetingId}`})
+                res.status(201).json({success: true, data: meeting})
             } catch (error) {
                 res.status(400).json({success: false, message: error.response.data})
             }
@@ -28,8 +28,8 @@ const handler = async (req, res) => {
 
         case 'DELETE':
             try {
-                const deletedMember = await Member.findByIdAndDelete(memberId)
-                if (!deletedMember) return res.status(400).json({success: false, message: `Unable to find member with id ${memberId}`})
+                const deletedMeeting = await Meeting.findByIdAndDelete(meetingId)
+                if (!deletedMeeting) return res.status(400).json({success: false, message: `Unable to find meeting with id ${meetingId}`})
                 res.status(201).json({success: true})
             } catch (error) {
                 res.status(400).json({success: false, message: error.response.data})
