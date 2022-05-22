@@ -1,8 +1,8 @@
 
-const EditMeeting = () => {
+const EditMeetingPage = () => {
   return (
-    <div>Edit Meeting</div>
+    <div>Edit Meeting Page</div>
   )
 }
 
-export default EditMeeting
+export default EditMeetingPage

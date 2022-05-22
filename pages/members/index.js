@@ -1,8 +1,8 @@
 
-const Members = () => {
+const MembersPage = () => {
   return (
-    <div>Members</div>
+    <div>Members Page</div>
   )
 }
 
-export default Members
+export default MembersPage

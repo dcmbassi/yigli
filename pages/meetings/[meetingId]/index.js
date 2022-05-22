@@ -1,8 +1,8 @@
 
-const MeetingDetails = () => {
+const MeetingDetailsPage = () => {
   return (
-    <div>Meeting Details</div>
+    <div>Meeting Details Page</div>
   )
 }
 
-export default MeetingDetails
+export default MeetingDetailsPage
