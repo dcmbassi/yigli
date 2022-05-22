@@ -7,7 +7,7 @@ if (!MONGO_URI) throw new Error('Please define a MongoDB URI in your environment
 let cached = global.mongoose
 
 if (!cached) {
-    cached = global.mongoose = {conn: null, promise: null}
+    cached = global.mongoose = { conn: null, promise: null }
 }
 
 const dbConnect = async () => {
@@ -20,7 +20,7 @@ const dbConnect = async () => {
 
         cached.conn = await cached.promise
         return cached.conn
-    } 
+    }
 }
 
 export default dbConnect

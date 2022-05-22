@@ -1,6 +1,6 @@
 import Head from "next/head"
 
-const Meta = ({title, description}) => {
+const Meta = ({ title, description }) => {
     return (
         <Head>
             <title>Yigli {title && `| ${title}`}</title>
