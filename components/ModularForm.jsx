@@ -1,8 +1,30 @@
-import React from 'react'
+import { useState } from "react"
+
+const initialFormValues = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    address: '',
+    sex: ''
+}
 
 const ModularForm = ({ data }) => {
+    const [formValues, setFormValues] = useState(initialFormValues)
+
+    const handleInputChange = e => {
+        const value = e.target.value
+        setFormValues({...formValues, [e.target.name]: value})
+    }
+
+    const handleSubmit = e => {
+        e.preventDefault()
+
+        console.log(formValues);
+    }
+
     return (
-        <form >
+        <form onSubmit={handleSubmit}>
             {data.map(item => (
                 <div key={item.name}>
                     {item.type === 'radio'
@@ -11,7 +33,7 @@ const ModularForm = ({ data }) => {
                                 <legend>{item.displayedText}</legend>
                                 {item.options.map(option => (
                                     <p key={option.key}>
-                                        <input type={item.type} name={item.name} id={option.value} value={option.value} />
+                                        <input type={item.type} name={item.name} id={option.value} value={option.value} onChange={handleInputChange} />
                                         <label htmlFor={option.value}>{option.key}</label>
                                     </p>
                                 ))}
@@ -19,11 +41,13 @@ const ModularForm = ({ data }) => {
                         )
                         : (
                             <>
-                                <label htmlFor={item.name}>{item.displayedText}</label>
-                                <input type={item.type} name={item.name} id={item.name} />
+                                <label htmlFor={item.name}>{item.displayedText}: </label>
+                                <input type={item.type} name={item.name} id={item.name} value={formValues[item.name]} onChange={handleInputChange} />
                             </>
                         )
                     }
+                    <br />
+                    <br />
                 </div>
             ))}
             <input type="submit" value="Enregistrer" />

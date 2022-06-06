@@ -1,4 +1,4 @@
-export const memberData = [
+export const memberFields = [
     {
         name: 'firstName',
         displayedText: 'Prénom',
@@ -32,5 +32,18 @@ export const memberData = [
             {value: 'female', key: 'F'}, 
             {value: 'male', key: 'M'}
         ]
+    },
+]
+
+export const meetingFields = [
+    {
+        name: 'date',
+        displayedText: 'Date',
+        type: 'date'
+    },
+    {
+        name: 'location',
+        displayedText: 'Lieu',
+        type: 'text'
     },
 ]
