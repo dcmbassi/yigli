@@ -1,16 +1,8 @@
 import { useState } from "react"
 
-const initialFormValues = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    address: '',
-    sex: ''
-}
 
 const ModularForm = ({ data }) => {
-    const [formValues, setFormValues] = useState(initialFormValues)
+    const [formValues, setFormValues] = useState(data.initialValues)
 
     const handleInputChange = e => {
         const value = e.target.value
@@ -25,7 +17,7 @@ const ModularForm = ({ data }) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            {data.map(item => (
+            {data.fields.map(item => (
                 <div key={item.name}>
                     {item.type === 'radio'
                         ? (
