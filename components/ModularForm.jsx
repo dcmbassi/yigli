@@ -1,6 +1,5 @@
 import { useState } from "react"
 
-
 const ModularForm = ({ data }) => {
     const [formValues, setFormValues] = useState(data.initialValues)
 
@@ -11,7 +10,12 @@ const ModularForm = ({ data }) => {
 
     const handleSubmit = e => {
         e.preventDefault()
-
+        /*
+            TO DO:
+            1. Validate form values
+            2. Create helper function to call BE without exposing path
+            3. Call helper
+        */
         console.log(formValues);
     }
 

@@ -1,3 +1,8 @@
+/*
+    TO DO:
+    1. Add path property to each exported constant
+*/
+
 export const memberFields = {
     fields: [
         {
@@ -45,15 +50,21 @@ export const memberFields = {
     }
 }
 
-export const meetingFields = [
-    {
-        name: 'date',
-        displayedText: 'Date',
-        type: 'date'
-    },
-    {
-        name: 'location',
-        displayedText: 'Lieu',
-        type: 'text'
-    },
-]
+export const meetingFields = {
+    fields: [
+        {
+            name: 'date',
+            displayedText: 'Date',
+            type: 'date'
+        },
+        {
+            name: 'location',
+            displayedText: 'Lieu',
+            type: 'text'
+        },
+    ],
+    initialValues: {
+        date: '',
+        location: ''
+    }
+}
