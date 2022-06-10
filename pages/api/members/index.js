@@ -16,6 +16,12 @@ const handler = async (req, res) => {
             }
             break;
         case 'POST':
+            /*
+                TO DO:
+                1. Destructure req.body to extract password
+                2. Hash password before creating model instance
+                3. Remove password from return value before sending response
+            */
             try {
                 const member = await Member.create(req.body)
                 res.status(201).json({ success: true, data: member })
