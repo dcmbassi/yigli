@@ -47,7 +47,8 @@ export const memberFields = {
         password: '',
         address: '',
         sex: ''
-    }
+    },
+    endpoint: '/api/members'
 }
 
 export const meetingFields = {
@@ -66,5 +67,6 @@ export const meetingFields = {
     initialValues: {
         date: '',
         location: ''
-    }
+    },
+    endpoint: '/api/meetings'
 }

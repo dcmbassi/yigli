@@ -1,4 +1,5 @@
 import { useState } from "react"
+import submitForm from "../src/utils/formSubmission"
 
 const ModularForm = ({ data }) => {
     const [formValues, setFormValues] = useState(data.initialValues)
@@ -8,15 +9,11 @@ const ModularForm = ({ data }) => {
         setFormValues({...formValues, [e.target.name]: value})
     }
 
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault()
-        /*
-            TO DO:
-            1. Validate form values
-            2. Create helper function to call BE without exposing path
-            3. Call helper
-        */
-        console.log(formValues);
+        
+        const result = await submitForm(data.endpoint, formValues)
+        console.log(result)
     }
 
     return (
