@@ -19,8 +19,6 @@ const handler = async (req, res) => {
         case 'POST':
             /*
                 TO DO:
-                1. Destructure req.body to extract password
-                2. Hash password before creating model instance
                 3. Remove password from return value before sending response
             */
            const {password} = req.body
@@ -29,7 +27,9 @@ const handler = async (req, res) => {
            const newBody = {...req.body, password: hashedPassword}
             try {
                 const member = await Member.create(newBody)
-                res.status(201).json({ success: true, data: member })
+                let sanitisedMember = member.toObject()
+                delete sanitisedMember.password
+                res.status(201).json({ success: true, data: sanitisedMember })
             } catch (error) {
                 res.status(400).json({ success: false, message: error.response.data })
             }
