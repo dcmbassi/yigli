@@ -12,8 +12,12 @@ const ModularForm = ({ data }) => {
     const handleSubmit = async e => {
         e.preventDefault()
         
-        const result = await submitForm(data.endpoint, formValues)
-        console.log(result)
+        try {
+            const result = await submitForm(data.endpoint, formValues)
+            console.log(result)
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (

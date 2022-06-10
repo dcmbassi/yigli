@@ -19,19 +19,24 @@ const handler = async (req, res) => {
         case 'POST':
             /*
                 TO DO:
-                3. Remove password from return value before sending response
+                1. Ensure that req.email is unique
+                2. Respond with a 400 if not
             */
-           const {password} = req.body
-           const salt = await bcrypt.genSalt(10)
-           const hashedPassword = await bcrypt.hash(password, salt)
-           const newBody = {...req.body, password: hashedPassword}
             try {
+                const { email, password } = req.body
+                const memberExists = await Member.findOne({ email })
+                if (memberExists) {
+                    return res.status(400).json({ success: false, message: 'Member already exists' })
+                }
+                const salt = await bcrypt.genSalt(10)
+                const hashedPassword = await bcrypt.hash(password, salt)
+                const newBody = { ...req.body, password: hashedPassword }
                 const member = await Member.create(newBody)
                 let sanitisedMember = member.toObject()
                 delete sanitisedMember.password
                 res.status(201).json({ success: true, data: sanitisedMember })
             } catch (error) {
-                res.status(400).json({ success: false, message: error.response.data })
+                res.status(400).json({ success: false, message: error })
             }
             break;
 
