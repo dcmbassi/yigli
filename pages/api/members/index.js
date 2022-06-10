@@ -1,5 +1,6 @@
 import Member from '../../../models/memberModel'
 import dbConnect from '../../../db/connect'
+import bcrypt from 'bcryptjs'
 
 const handler = async (req, res) => {
     const { method } = req
@@ -22,8 +23,12 @@ const handler = async (req, res) => {
                 2. Hash password before creating model instance
                 3. Remove password from return value before sending response
             */
+           const {password} = req.body
+           const salt = await bcrypt.genSalt(10)
+           const hashedPassword = await bcrypt.hash(password, salt)
+           const newBody = {...req.body, password: hashedPassword}
             try {
-                const member = await Member.create(req.body)
+                const member = await Member.create(newBody)
                 res.status(201).json({ success: true, data: member })
             } catch (error) {
                 res.status(400).json({ success: false, message: error.response.data })
