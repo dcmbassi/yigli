@@ -5,14 +5,15 @@ const ModularForm = ({ data }) => {
     const [formValues, setFormValues] = useState(data.initialValues)
     const [successMessage, setSuccessMessage] = useState('')
     const [success, setSuccess] = useState(false)
+    const {title} = data
 
     useEffect(() => {
-        if (success) setSuccessMessage('Resource created')
+        if (success) setSuccessMessage(`${title} created`)
         setTimeout(() => {
             setSuccessMessage('')
             setSuccess(false)
         }, 2000)
-    }, [success])
+    }, [success, title])
 
     const handleInputChange = e => {
         const value = e.target.value

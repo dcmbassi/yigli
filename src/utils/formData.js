@@ -4,6 +4,7 @@
 */
 
 export const memberFields = {
+    title: 'Member',
     fields: [
         {
             name: 'firstName',
