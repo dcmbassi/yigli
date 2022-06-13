@@ -1,8 +1,18 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import submitForm from "../src/utils/formSubmission"
 
 const ModularForm = ({ data }) => {
     const [formValues, setFormValues] = useState(data.initialValues)
+    const [successMessage, setSuccessMessage] = useState('')
+    const [success, setSuccess] = useState(false)
+
+    useEffect(() => {
+        if (success) setSuccessMessage('Resource created')
+        setTimeout(() => {
+            setSuccessMessage('')
+            setSuccess(false)
+        }, 2000)
+    }, [success])
 
     const handleInputChange = e => {
         const value = e.target.value
@@ -20,12 +30,18 @@ const ModularForm = ({ data }) => {
         try {
             const result = await submitForm(data.endpoint, formValues)
             console.log(result)
+            if (result.success) {
+                setSuccess(true)
+                setFormValues(data.initialValues)
+                
+            }
         } catch (error) {
             console.log(error)
         }
     }
 
     return (
+        <>
         <form onSubmit={handleSubmit}>
             {data.fields.map(item => (
                 <div key={item.name}>
@@ -54,6 +70,8 @@ const ModularForm = ({ data }) => {
             ))}
             <input type="submit" value="Enregistrer" />
         </form>
+        <p>{successMessage}</p>
+        </>
     )
 }
 
