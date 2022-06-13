@@ -17,6 +17,10 @@ const handler = async (req, res) => {
             break;
         case 'POST':
             try {
+                /*
+                    TO DO:
+                    1. Set the upcoming field to false if the meeting date is in the past
+                */
                 const meeting = await Meeting.create(req.body)
                 res.status(201).json({ success: true, data: meeting })
             } catch (error) {
