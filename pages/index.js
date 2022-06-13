@@ -6,16 +6,16 @@ import Meeting from '../models/meetingModel'
 import { extractDate } from '../src/utils/helpers'
 
 export default function Home({ members, meetings }) {
+  const futureMeetings = meetings.filter(meeting => meeting.upcoming)
+  const pastMeetings = meetings.filter(meeting => !meeting.upcoming)
 
   return (
     <div className={styles.container}>
       <Meta description='Descendance de Jean-Baptiste Medoung' />
 
       <main className={styles.main}>
-        {members.map(member => (
-          <p key={member.email}>{member.email}</p>
-        ))}
-        <hr />
+        <div>
+          <h4>Prochaines réunions</h4>
         <table>
           <thead>
             <tr>
@@ -28,7 +28,7 @@ export default function Home({ members, meetings }) {
             </tr>
           </thead>
           <tbody>
-            {meetings.map(meeting => (
+            {futureMeetings.map(meeting => (
               <tr key={meeting._id}>
                 <td>{extractDate(meeting.date)}</td>
                 <td>{meeting.location}</td>
@@ -36,6 +36,34 @@ export default function Home({ members, meetings }) {
             ))}
           </tbody>
         </table>
+        </div>
+        {members.map(member => (
+          <p key={member.email}>{member.email}</p>
+        ))}
+        <hr />
+        <div>
+          <h4>Réunions récentes</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>
+                Date
+              </th>
+              <th>
+                Lieu
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {pastMeetings.map(meeting => (
+              <tr key={meeting._id}>
+                <td>{extractDate(meeting.date)}</td>
+                <td>{meeting.location}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        </div>
       </main>
 
 
