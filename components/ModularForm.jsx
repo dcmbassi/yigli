@@ -20,6 +20,10 @@ const ModularForm = ({ data }) => {
         setFormValues({...formValues, [e.target.name]: value})
     }
 
+    const resetFields = () => {
+        setFormValues(data.initialValues)
+    }
+
     const handleSubmit = async e => {
         e.preventDefault()
 
@@ -33,7 +37,7 @@ const ModularForm = ({ data }) => {
             console.log(result)
             if (result.success) {
                 setSuccess(true)
-                setFormValues(data.initialValues)
+                resetFields()
                 
             }
         } catch (error) {
@@ -52,7 +56,7 @@ const ModularForm = ({ data }) => {
                                 <legend>{item.displayedText}</legend>
                                 {item.options.map(option => (
                                     <p key={option.key}>
-                                        <input type={item.type} name={item.name} id={option.value} value={option.value} onChange={handleInputChange} />
+                                        <input type={item.type} name={item.name} id={option.value} checked={formValues[item.name] === option.value} value={option.value} onChange={handleInputChange} />
                                         <label htmlFor={option.value}>{option.key}</label>
                                     </p>
                                 ))}
