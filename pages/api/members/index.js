@@ -17,11 +17,6 @@ const handler = async (req, res) => {
             }
             break;
         case 'POST':
-            /*
-                TO DO:
-                1. Ensure that req.email is unique
-                2. Respond with a 400 if not
-            */
             try {
                 const { email, password } = req.body
                 const memberExists = await Member.findOne({ email })

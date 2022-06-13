@@ -11,6 +11,11 @@ const ModularForm = ({ data }) => {
 
     const handleSubmit = async e => {
         e.preventDefault()
+
+        /*
+            TO DO:
+            1. Validate inputs
+        */
         
         try {
             const result = await submitForm(data.endpoint, formValues)
