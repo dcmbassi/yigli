@@ -3,6 +3,7 @@ import Member from '../models/memberModel'
 import styles from '../styles/Home.module.css'
 import dbConnect from '../db/connect'
 import Meeting from '../models/meetingModel'
+import { extractDate } from '../src/utils/helpers'
 
 export default function Home({ members, meetings }) {
 
@@ -29,7 +30,7 @@ export default function Home({ members, meetings }) {
           <tbody>
             {meetings.map(meeting => (
               <tr key={meeting._id}>
-                <td>{meeting.date}</td>
+                <td>{extractDate(meeting.date)}</td>
                 <td>{meeting.location}</td>
               </tr>
             ))}
