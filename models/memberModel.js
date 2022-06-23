@@ -11,11 +11,9 @@ const memberModel = mongoose.Schema({
     },
     email: {
         type: String,
-        required: [true, 'Please enter a valid email address']
     },
     password: {
         type: String,
-        required: [true, 'Please enter a password']
     },
     address: {
         type: String
