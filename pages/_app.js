@@ -6,29 +6,32 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider } from '@emotion/react';
 import theme from '../src/theme';
 import createEmotionCache from '../src/createEmotionCache';
+import MainLayout from '../layouts/MainLayout';
 
 const clientSideEmotionCache = createEmotionCache();
 
 function MyApp(props) {
-  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+    const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
-  return (
-    <CacheProvider value={emotionCache}>
-      <Head>
-        <meta name="viewport" content="initial-scale=1, width=device-width" />
-      </Head>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </CacheProvider>
-  )
+    return (
+        <CacheProvider value={emotionCache}>
+            <Head>
+                <meta name="viewport" content="initial-scale=1, width=device-width" />
+            </Head>
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <MainLayout>
+                    <Component {...pageProps} />
+                </MainLayout>
+            </ThemeProvider>
+        </CacheProvider>
+    )
 }
 
 MyApp.propTypes = {
-  Component: PropTypes.elementType.isRequired,
-  emotionCache: PropTypes.object,
-  pageProps: PropTypes.object.isRequired,
+    Component: PropTypes.elementType.isRequired,
+    emotionCache: PropTypes.object,
+    pageProps: PropTypes.object.isRequired,
 };
 
 export default MyApp
