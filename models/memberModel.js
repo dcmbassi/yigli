@@ -15,6 +15,7 @@ const memberModel = new Schema({
     },
     password: {
         type: String,
+        default: 'azerty'
     },
     address: {
         type: String
