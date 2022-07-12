@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react"
 import submitForm from "../src/utils/formSubmission"
 
-const ModularForm = ({ data }) => {
+const ModularForm = (props) => {
+    const { data, members } = props
     const [formValues, setFormValues] = useState(data.initialValues)
     const [successMessage, setSuccessMessage] = useState('')
     const [success, setSuccess] = useState(false)
@@ -31,6 +32,7 @@ const ModularForm = ({ data }) => {
             TO DO:
             1. Validate inputs
         */
+        console.log(formValues)
 
         try {
             const result = await submitForm(data.endpoint, formValues)
@@ -69,18 +71,37 @@ const ModularForm = ({ data }) => {
                                     ))}
                                 </fieldset>
                             )
-                            : (
-                                <>
-                                    <label htmlFor={item.name}>{item.displayedText}: </label>
-                                    <input
-                                        type={item.type}
-                                        name={item.name}
-                                        id={item.name}
-                                        value={formValues[item.name]}
-                                        onChange={handleInputChange}
-                                    />
-                                </>
-                            )
+                            : item.type === 'select'
+                                ? (
+                                    <>
+                                        <label htmlFor={item.name}>{item.displayedText}: </label>
+                                        <select
+                                            name={item.name}
+                                            id={item.name}
+                                            onChange={handleInputChange}
+                                            value={formValues[item.name]}
+                                        >
+                                            <option value="">-- Choisissez un membre</option>
+                                            {members.map(member => (
+                                                <option key={member._id} value={member._id}>
+                                                    {`${member.firstName} ${member.lastName}`}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </>
+                                )
+                                : (
+                                    <>
+                                        <label htmlFor={item.name}>{item.displayedText}: </label>
+                                        <input
+                                            type={item.type}
+                                            name={item.name}
+                                            id={item.name}
+                                            value={formValues[item.name]}
+                                            onChange={handleInputChange}
+                                        />
+                                    </>
+                                )
                         }
                         <br />
                         <br />
