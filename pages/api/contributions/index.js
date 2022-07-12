@@ -17,7 +17,8 @@ const handler = async (req, res) => {
             break;
         case 'POST':
             try {
-                const contribution = await Contribution.create(req.body)
+                const contributionData = {...req.body, amount: parseInt(req.body.amount)}
+                const contribution = await Contribution.create(contributionData)
                 res.status(201).json({ success: true, data: contribution })
             } catch (error) {
                 res.status(400).json({ success: false, message: error.response.data })
