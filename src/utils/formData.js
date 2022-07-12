@@ -71,3 +71,29 @@ export const meetingFields = {
     },
     endpoint: '/api/meetings'
 }
+
+export const contributionFields = {
+    fields: [
+        {
+            name: 'contributor',
+            displayedText: 'Contributeur',
+            type: 'select'
+        },
+        {
+            name: 'amount',
+            displayedText: 'Montant',
+            type: 'number'
+        },
+        {
+            name: 'date',
+            displayedText: 'Date',
+            type: 'date'
+        },
+    ],
+    initialValues: {
+        contributor: '',
+        amount: '',
+        date: ''
+    },
+    endpoint: '/api/contributions'
+}
