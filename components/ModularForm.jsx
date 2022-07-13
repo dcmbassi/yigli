@@ -32,7 +32,6 @@ const ModularForm = (props) => {
             TO DO:
             1. Validate inputs
         */
-        console.log(formValues)
 
         try {
             const result = await submitForm(data.endpoint, formValues)
