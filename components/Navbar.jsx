@@ -19,6 +19,7 @@ import Typography from '@mui/material/Typography';
 const pages = [
     { label: 'Accueil', destination: '/' },
     { label: 'Membres', destination: '/members' },
+    { label: 'Réunions', destination: '/meetings' },
     { label: 'Contributions', destination: '/contributions' },
     { label: 'A Propos', destination: '/about' },
 ]
