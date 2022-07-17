@@ -4,7 +4,7 @@ import dbConnect from '../db/connect'
 import Member from '../models/memberModel'
 import Meeting from '../models/meetingModel'
 import Contribution from '../models/contributionModel'
-import { extractDate } from '../src/utils/helpers'
+import { extractDate, formatCurrency } from '../src/utils/helpers'
 
 export default function Home({ members, meetings, totalContributions}) {
     const futureMeetings = meetings.filter(meeting => meeting.upcoming)
@@ -17,7 +17,7 @@ export default function Home({ members, meetings, totalContributions}) {
             <main className={styles.main}>
                 <div>
                     <h4>Prochaines réunions</h4>
-                    <p>{totalContributions}</p>
+                    <p>{ formatCurrency(totalContributions) }</p>
                     <table>
                         <thead>
                             <tr>
@@ -82,8 +82,6 @@ export const getServerSideProps = async () => {
         { $match: { amount: { $gte: 0 } } },
         { $group: { _id: null, totalAmount: { $sum: '$amount' } } }
     ])
-
-    console.log(totalContributions[0])
 
     const members = memberResult.map(doc => {
         const member = doc.toObject()
