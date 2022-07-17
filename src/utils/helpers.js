@@ -9,6 +9,11 @@ const extractDate = (dateTimeString) => {
     return `${day}/${month}/${date.getFullYear()}`
 }
 
+const formatCurrency = (amount, currency = 'FCFA') => {
+    return `${amount} ${currency}`
+}
+
 export {
-    extractDate
+    extractDate,
+    formatCurrency
 }
