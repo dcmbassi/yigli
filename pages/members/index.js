@@ -2,13 +2,13 @@ import Member from '../../models/memberModel'
 import styles from '../../styles/Home.module.css'
 import dbConnect from '../../db/connect'
 import Meta from '../../layouts/Meta'
+import MembersGrid from '../../components/MembersGrid'
 
 const MembersPage = ({members}) => {
   return (
     <div className={styles.container}>
         <Meta description="Membres de l\'association Yigli Family" />
-        <p>{members[0].lastName}</p>
-
+        <MembersGrid members={members} />
     </div>
   )
 }
