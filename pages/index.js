@@ -1,7 +1,6 @@
 import Meta from '../layouts/Meta'
 import styles from '../styles/Home.module.css'
 import dbConnect from '../db/connect'
-import Member from '../models/memberModel'
 import Meeting from '../models/meetingModel'
 import Contribution from '../models/contributionModel'
 import { extractDate, formatCurrency } from '../src/utils/helpers'
@@ -38,6 +37,7 @@ export default function Home({ meetings, totalContributions}) {
                             ))}
                         </tbody>
                     </table>
+                </div>
                 <hr />
                 <div>
                     <h4>Réunions récentes</h4>
@@ -78,7 +78,7 @@ export const getServerSideProps = async () => {
         { $group: { _id: null, totalAmount: { $sum: '$amount' } } }
     ])
 
-
+    
     const meetings = meetingResult.map(doc => {
         const meeting = doc.toObject()
         meeting._id = meeting._id.toString()
