@@ -6,7 +6,7 @@ import Meeting from '../models/meetingModel'
 import Contribution from '../models/contributionModel'
 import { extractDate, formatCurrency } from '../src/utils/helpers'
 
-export default function Home({ members, meetings, totalContributions}) {
+export default function Home({ meetings, totalContributions}) {
     const futureMeetings = meetings.filter(meeting => meeting.upcoming)
     const pastMeetings = meetings.filter(meeting => !meeting.upcoming)
 
@@ -38,10 +38,6 @@ export default function Home({ members, meetings, totalContributions}) {
                             ))}
                         </tbody>
                     </table>
-                </div>
-                {members.map(member => (
-                    <p key={member.email}>{member.email}</p>
-                ))}
                 <hr />
                 <div>
                     <h4>Réunions récentes</h4>
@@ -76,18 +72,12 @@ export default function Home({ members, meetings, totalContributions}) {
 export const getServerSideProps = async () => {
     await dbConnect()
 
-    const memberResult = await Member.find()
     const meetingResult = await Meeting.find()
     const totalContributions = await Contribution.aggregate([
         { $match: { amount: { $gte: 0 } } },
         { $group: { _id: null, totalAmount: { $sum: '$amount' } } }
     ])
 
-    const members = memberResult.map(doc => {
-        const member = doc.toObject()
-        member._id = member._id.toString()
-        return member
-    })
 
     const meetings = meetingResult.map(doc => {
         const meeting = doc.toObject()
@@ -97,7 +87,6 @@ export const getServerSideProps = async () => {
 
     return {
         props: {
-            members: JSON.parse(JSON.stringify(members)),
             meetings: JSON.parse(JSON.stringify(meetings)),
             totalContributions: totalContributions[0].totalAmount
         }
