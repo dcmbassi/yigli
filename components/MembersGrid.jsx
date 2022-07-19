@@ -1,5 +1,6 @@
 import { Typography } from '@mui/material'
 import Grid from '@mui/material/Grid'
+import Link from 'next/link'
 import MemberCard from './MemberCard'
 
 const MembersGrid = ({ members }) => {
@@ -22,7 +23,11 @@ const MembersGrid = ({ members }) => {
                         key={member.id}
                         xs={12} sm={6} md={4} lg={3}
                     >
-                        <MemberCard member={member} />
+                        <Link href={`/members/${member._id}`} passHref>
+                            <a style={{textDecoration: 'none'}}>
+                            <MemberCard member={member} />
+                            </a>
+                        </Link>
                     </Grid>
                 ))}
             </Grid>
