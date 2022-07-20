@@ -25,8 +25,6 @@ export default function Home({ meetings, totalContributions}) {
                     <MeetingsTable meetings={pastMeetings} />
                 </div>
             </main>
-
-
         </div>
     )
 }
