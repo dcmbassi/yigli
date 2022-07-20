@@ -14,7 +14,7 @@ const MemberDetailsPage = ({ member }) => {
             <Box mt={2} p={2} sx={{ background: '#ddd', width: '100%' }}>
                 <Stack
                     spacing={2}
-                    alignItems='flex-start'
+                    alignItems={{xs: 'center', sm: 'flex-start'}}
                     direction={{ xs: 'column', sm: 'row', md: 'row' }}
                 >
                     <Box>
@@ -28,7 +28,7 @@ const MemberDetailsPage = ({ member }) => {
                         flexGrow={1}
                         spacing={2}
                         sx={{ height: '200px' }}
-                        justifyContent='space-between'
+                        justifyContent={{xs: 'flex-start', sm: 'space-between'}}
                         alignItems='flex-start'
                     >
                         <Stack
@@ -39,10 +39,11 @@ const MemberDetailsPage = ({ member }) => {
                         >
                             <Typography
                                 sx={{ typography: { xs: 'h4', sm: 'h3', md: 'h2' } }}
+                                
                             >
                                 {`${member.firstName} ${member.lastName}`}
                             </Typography>
-                            <Typography color='text.secondary'>
+                            <Typography color='text.secondary' textAlign={{xs: 'center', sm: 'left'}}>
                                 <LocationOnIcon mr={1} /> {member.address}
                             </Typography>
                         </Stack>
