@@ -3,7 +3,8 @@ import styles from '../styles/Home.module.css'
 import dbConnect from '../db/connect'
 import Meeting from '../models/meetingModel'
 import Contribution from '../models/contributionModel'
-import { extractDate, formatCurrency } from '../src/utils/helpers'
+import {formatCurrency } from '../src/utils/helpers'
+import MeetingsTable from '../components/MeetingsTable'
 
 export default function Home({ meetings, totalContributions}) {
     const futureMeetings = meetings.filter(meeting => meeting.upcoming)
@@ -16,51 +17,12 @@ export default function Home({ meetings, totalContributions}) {
             <main className={styles.main}>
                 <div>
                     <h4>Prochaines réunions</h4>
-                    <p>{ formatCurrency(totalContributions) }</p>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>
-                                    Date
-                                </th>
-                                <th>
-                                    Lieu
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {futureMeetings.map(meeting => (
-                                <tr key={meeting._id}>
-                                    <td>{extractDate(meeting.date)}</td>
-                                    <td>{meeting.location}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                    <MeetingsTable meetings={futureMeetings} />
                 </div>
-                <hr />
+                
                 <div>
                     <h4>Réunions récentes</h4>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>
-                                    Date
-                                </th>
-                                <th>
-                                    Lieu
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {pastMeetings.map(meeting => (
-                                <tr key={meeting._id}>
-                                    <td>{extractDate(meeting.date)}</td>
-                                    <td>{meeting.location}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                    <MeetingsTable meetings={pastMeetings} />
                 </div>
             </main>
 
