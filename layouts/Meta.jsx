@@ -5,7 +5,7 @@ const Meta = ({ title, description }) => {
         <Head>
             <title>Yigli Family {title && `| ${title}`}</title>
             <meta name="description" content={description} />
-            {/* <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" /> */}
+            <link rel="icon" href="img/logo-nobg.png" type="image/png" />
         </Head>
     )
 }
