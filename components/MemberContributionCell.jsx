@@ -1,0 +1,17 @@
+import Stack from "@mui/material/Stack"
+import Typography from "@mui/material/Typography";
+
+const MemberContributionCell = () => {
+    return (
+        <Stack
+            justifyContent={{ xs: 'center', sm: 'flex-start' }}
+            sx={{width: '100%', background: '#eee'}}
+        >
+            <Typography textAlign={{ xs: 'center', sm: 'left' }} >
+                Contributions 111
+            </Typography>
+        </Stack>
+    )
+}
+
+export default MemberContributionCell
