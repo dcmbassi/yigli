@@ -6,6 +6,7 @@ import dbConnect from "../../../db/connect"
 import Member from '../../../models/memberModel'
 import MemberNameCell from "../../../components/MemberNameCell";
 import MemberContributionCell from "../../../components/MemberContributionCell";
+import MemberImage from "../../../components/MemberImage";
 
 const MemberDetailsPage = ({ member }) => {
     console.log({ member })
@@ -17,14 +18,7 @@ const MemberDetailsPage = ({ member }) => {
                     alignItems={{ xs: 'center', sm: 'flex-start' }}
                     direction={{ xs: 'column', sm: 'row', md: 'row' }}
                 >
-                    <Box >
-                        <Image
-                            src='/img/sample.jpg'
-                            alt='Placeholder pic'
-                            width={200} height={200}
-                            layout='fixed'
-                        />
-                    </Box>
+                    <MemberImage />
                     <Stack
                         flexGrow={1}
                         spacing={2}
