@@ -4,8 +4,8 @@ import Box from "@mui/material/Box"
 import Container from "@mui/material/Container"
 import dbConnect from "../../../db/connect"
 import Member from '../../../models/memberModel'
-import Typography from "@mui/material/Typography";
-import LocationOnIcon from '@mui/icons-material/LocationOn';
+import MemberNameCell from "../../../components/MemberNameCell";
+import MemberContributionCell from "../../../components/MemberContributionCell";
 
 const MemberDetailsPage = ({ member }) => {
     console.log({ member })
@@ -14,7 +14,7 @@ const MemberDetailsPage = ({ member }) => {
             <Box mt={2} p={2} sx={{ background: '#ddd', width: '100%' }}>
                 <Stack
                     spacing={2}
-                    alignItems={{xs: 'center', sm: 'flex-start'}}
+                    alignItems={{ xs: 'center', sm: 'flex-start' }}
                     direction={{ xs: 'column', sm: 'row', md: 'row' }}
                 >
                     <Box>
@@ -28,32 +28,15 @@ const MemberDetailsPage = ({ member }) => {
                         flexGrow={1}
                         spacing={2}
                         sx={{ height: '200px' }}
-                        justifyContent={{xs: 'flex-start', sm: 'space-between'}}
+                        justifyContent={{ xs: 'flex-start', sm: 'space-between' }}
                         alignItems='flex-start'
                     >
-                        <Stack
-                            sx={{ background: '#eee', width: '100%' }}
-                            justifyContent={{ sm: 'flex-start', md: 'space-between' }}
-                            alignItems={{ sm: 'flex-start', md: 'center' }}
-                            direction={{ xs: 'column', sm: 'column', md: 'row' }}
-                        >
-                            <Typography
-                                sx={{ typography: { xs: 'h4', sm: 'h3', md: 'h2' } }}
-                                
-                            >
-                                {`${member.firstName} ${member.lastName}`}
-                            </Typography>
-                            <Typography color='text.secondary' textAlign={{xs: 'center', sm: 'left'}}>
-                                <LocationOnIcon mr={1} /> {member.address}
-                            </Typography>
-                        </Stack>
-                        <Stack>
-                            <Typography>
-                                Contributions
-                            </Typography>
-                        </Stack>
+                        <MemberNameCell
+                            memberName={`${member.firstName} ${member.lastName}`}
+                            memberAddress={member.address}
+                        />
+                        <MemberContributionCell />
                     </Stack>
-
                 </Stack>
             </Box>
         </Container>
