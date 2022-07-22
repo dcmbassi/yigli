@@ -5,20 +5,25 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 const MemberNameCell = ({memberName, memberAddress}) => {
     return (
         <Stack
-            sx={{ background: '#eee', width: '100%' }}
+            sx={{ width: '100%' }}
+            spacing={1}
             justifyContent={{ sm: 'flex-start', md: 'space-between' }}
             alignItems={{ sm: 'flex-start', md: 'center' }}
             direction={{ xs: 'column', sm: 'column', md: 'row' }}
         >
             <Typography
-                sx={{ typography: { xs: 'h4', sm: 'h3', md: 'h2' } }}
+                
+                sx={{ 
+                    typography: { xs: 'h4', sm: 'h3', md: 'h2' }, 
+                    fontSize: {xs: '2.125rem', sm: '2.75rem', md: '3rem'}
+                }}
                 gutterBottom
             >
                 {memberName}
             </Typography>
             <Typography
                 color='text.secondary'
-                textAlign={{ xs: 'center', sm: 'left' }}
+                textAlign={{ xs: 'center', sm: 'left'}}
             >
                 <LocationOnIcon mr={1} /> {memberAddress}
             </Typography>

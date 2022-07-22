@@ -5,7 +5,7 @@ const MemberContributionCell = () => {
     return (
         <Stack
             justifyContent={{ xs: 'center', sm: 'flex-start' }}
-            sx={{width: '100%', background: '#eee'}}
+            sx={{ width: '100%' }}
         >
             <Typography textAlign={{ xs: 'center', sm: 'left' }} >
                 Contributions 111

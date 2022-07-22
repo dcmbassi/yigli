@@ -11,17 +11,18 @@ const MemberDetailsPage = ({ member }) => {
     console.log({ member })
     return (
         <Container>
-            <Box mt={2} p={2} sx={{ background: '#ddd', width: '100%' }}>
+            <Box mt={2} p={2} sx={{ width: '100%' }}>
                 <Stack
                     spacing={2}
                     alignItems={{ xs: 'center', sm: 'flex-start' }}
                     direction={{ xs: 'column', sm: 'row', md: 'row' }}
                 >
-                    <Box>
+                    <Box >
                         <Image
                             src='/img/sample.jpg'
                             alt='Placeholder pic'
                             width={200} height={200}
+                            layout='fixed'
                         />
                     </Box>
                     <Stack
