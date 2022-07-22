@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Image from "next/image";
 import Link from 'next/link';
 
 import AppBar from '@mui/material/AppBar';
@@ -14,7 +15,6 @@ import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-// import AdbIcon from '@mui/icons-material/Adb';
 
 const pages = [
     { label: 'Accueil', destination: '/' },
@@ -49,14 +49,17 @@ const Navbar = () => {
         <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
                     <Typography
                         variant="h6"
                         noWrap
                         component="div"
                         sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
                     >
-                        LOGO
+                        <Image
+                            src='/img/logo-nobg.png'
+                            alt='Logo Yigli'
+                            width={32} height={32}
+                        />
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -108,7 +111,11 @@ const Navbar = () => {
                             flexGrow: 1,
                         }}
                     >
-                        LOGO
+                        <Image
+                            src='/img/logo-nobg.png'
+                            alt='Logo Yigli'
+                            width={32} height={32}
+                        />
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
