@@ -17,6 +17,7 @@ const MemberNameCell = ({memberName, memberAddress}) => {
                     typography: { xs: 'h4', sm: 'h3', md: 'h2' }, 
                     fontSize: {xs: '2.125rem', sm: '2.75rem', md: '3rem'}
                 }}
+                textAlign={{ xs: 'center', sm: 'left'}}
                 gutterBottom
             >
                 {memberName}
