@@ -14,6 +14,7 @@ const MemberDetailsPage = ({ member }) => {
             <Box mt={2} p={2} sx={{ width: '100%' }}>
                 <Stack
                     spacing={2}
+                    mb={2}
                     alignItems={{ xs: 'center', sm: 'flex-start' }}
                     direction={{ xs: 'column', sm: 'row', md: 'row' }}
                 >
@@ -31,6 +32,14 @@ const MemberDetailsPage = ({ member }) => {
                         />
                         <MemberContributionCell />
                     </Stack>
+                </Stack>
+                <Stack
+                    spacing={2}
+                    direction={{ xs: 'column', sm: 'row' }}
+                    alignItems={{ xs: 'center', sm: 'flex-start' }}
+                >
+                    <Box sx={{ width: '200px', height: '200px', background: '#ddd' }}></Box>
+                    <Box sx={{ height: '200px', background: '#eee' }} flexGrow={1} >1</Box>
                 </Stack>
             </Box>
         </Container>
