@@ -6,42 +6,13 @@ import Member from '../../../models/memberModel'
 import MemberNameCell from "../../../components/MemberNameCell";
 import MemberContributionCell from "../../../components/MemberContributionCell";
 import MemberImage from "../../../components/MemberImage";
+import MemberDetails from "../../../components/MemberDetails"
 
 const MemberDetailsPage = ({ member }) => {
     console.log({ member })
     return (
         <Container>
-            <Box mt={2} p={2} sx={{ width: '100%' }}>
-                <Stack
-                    spacing={2}
-                    mb={2}
-                    alignItems={{ xs: 'center', sm: 'flex-start' }}
-                    direction={{ xs: 'column', sm: 'row', md: 'row' }}
-                >
-                    <MemberImage />
-                    <Stack
-                        flexGrow={1}
-                        spacing={2}
-                        sx={{ height: '200px' }}
-                        justifyContent={{ xs: 'flex-start', sm: 'space-between' }}
-                        alignItems='flex-start'
-                    >
-                        <MemberNameCell
-                            memberName={`${member.firstName} ${member.lastName}`}
-                            memberAddress={member.address}
-                        />
-                        <MemberContributionCell />
-                    </Stack>
-                </Stack>
-                <Stack
-                    spacing={2}
-                    direction={{ xs: 'column', sm: 'row' }}
-                    alignItems={{ xs: 'center', sm: 'flex-start' }}
-                >
-                    <Box sx={{ width: '200px', height: '200px', background: '#ddd' }}></Box>
-                    <Box sx={{ height: '200px', background: '#eee' }} flexGrow={1} >1</Box>
-                </Stack>
-            </Box>
+            <MemberDetails member={member} />
         </Container>
     )
 }
