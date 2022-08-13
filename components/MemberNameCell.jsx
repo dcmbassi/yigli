@@ -8,7 +8,7 @@ const MemberNameCell = ({ memberName, memberAddress }) => {
             sx={{ width: '100%' }}
             spacing={2}
             justifyContent={{ sm: 'flex-start', md: 'space-between' }}
-            alignItems={{ sm: 'flex-start', md: 'center' }}
+            alignItems={{ sm: 'flex-start', sm: 'center', md: 'center' }}
             direction={{ xs: 'column', sm: 'column', md: 'row' }}
         >
             <Typography
@@ -18,7 +18,6 @@ const MemberNameCell = ({ memberName, memberAddress }) => {
                     fontSize: { xs: '2.125rem', sm: '2.75rem', md: '3rem' }
                 }}
                 textAlign={{ xs: 'center', sm: 'left' }}
-                gutterBottom
             >
                 {memberName}
             </Typography>
@@ -28,15 +27,11 @@ const MemberNameCell = ({ memberName, memberAddress }) => {
                 justifyContent={{ xs: 'center', sm: 'flex-start' }}
                 alignItems='center'
             >
-                <Typography
-                // textAlign={{ xs: 'center', sm: 'left' }}
-                >
+                <Typography>
                     <LocationOnIcon mr={1} />
                 </Typography>
-                <Typography
-                // textAlign={{ xs: 'center', sm: 'left' }}
-                >
-                    {memberAddress}22
+                <Typography>
+                    {memberAddress}
                 </Typography>
 
             </Stack>

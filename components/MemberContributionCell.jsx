@@ -7,7 +7,7 @@ const MemberContributionCell = () => {
             justifyContent={{ xs: 'center', sm: 'flex-start' }}
             sx={{ width: '100%' }}
         >
-            <Typography textAlign={{ xs: 'center', sm: 'left' }} >
+            <Typography textAlign={{ xs: 'center', md: 'left' }} >
                 Contributions 111
             </Typography>
         </Stack>

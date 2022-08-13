@@ -9,12 +9,19 @@ const MemberImage = () => {
         3. While image is being fetched, display blurred placeholder
     */
     return (
-        <Box >
+        <Box
+            sx={{ width: '100%' }}
+            flex justifyContent='center'
+            alignItems='center'
+        >
             <Image
                 src='/img/sample.jpg'
                 alt='Placeholder pic'
+                style={{ display: 'block' }}
                 width={200} height={200}
-                layout='fixed'
+                objectFit='cover'
+                layout='responsive'
+
             />
         </Box>
     )
