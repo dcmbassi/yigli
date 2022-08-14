@@ -1,11 +1,8 @@
-import Stack from "@mui/material/Stack"
-import Box from "@mui/material/Box"
 import Container from "@mui/material/Container"
+
 import dbConnect from "../../../db/connect"
+
 import Member from '../../../models/memberModel'
-import MemberNameCell from "../../../components/MemberNameCell";
-import MemberContributionCell from "../../../components/MemberContributionCell";
-import MemberImage from "../../../components/MemberImage";
 import MemberDetails from "../../../components/MemberDetails"
 
 const MemberDetailsPage = ({ member }) => {
