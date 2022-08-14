@@ -17,7 +17,8 @@ const MemberNameCell = ({ memberName, memberAddress }) => {
                     typography: { xs: 'h4', sm: 'h3', md: 'h2' },
                     fontSize: { xs: '2.125rem', sm: '2.75rem', md: '3rem' }
                 }}
-                textAlign={{ xs: 'center', sm: 'left' }}
+                textAlign={{ xs: 'center', md: 'left' }}
+                
             >
                 {memberName}
             </Typography>
@@ -27,10 +28,10 @@ const MemberNameCell = ({ memberName, memberAddress }) => {
                 justifyContent={{ xs: 'center', sm: 'flex-start' }}
                 alignItems='center'
             >
-                <Typography>
+                <Typography sx={{fontSize: {xs: '.8rem', md: '.9rem'}}}>
                     <LocationOnIcon mr={1} />
                 </Typography>
-                <Typography>
+                <Typography noWrap sx={{fontSize: {xs: '.8rem', md: '.9rem'}}}>
                     {memberAddress}
                 </Typography>
 
