@@ -1,7 +1,3 @@
-/*
-    TO DO:
-    1. Add path property to each exported constant
-*/
 
 export const memberFields = {
     title: 'Member',
@@ -52,6 +48,78 @@ export const memberFields = {
     endpoint: '/api/members'
 }
 
+
+export const memberEditFields = {
+    title: 'Member',
+    fields: [
+        {
+            name: 'firstName',
+            displayedText: 'Prénom',
+            type: 'text'
+        },
+        {
+            name: 'lastName',
+            displayedText: 'Nom',
+            type: 'text'
+        },
+        {
+            name: 'email',
+            displayedText: 'Email',
+            type: 'email'
+        },
+        {
+            name: 'address',
+            displayedText: 'Adresse',
+            type: 'text'
+        },
+        {
+            name: 'sex',
+            displayedText: 'Sexe',
+            type: 'radio',
+            options: [
+                { value: 'female', key: 'F' },
+                { value: 'male', key: 'M' }
+            ]
+        },
+        {
+            name: 'generation',
+            displayedText: 'Génération',
+            type: 'select'
+        },
+        {
+            name: 'parents',
+            displayedText: 'Parents',
+            type: 'select',
+            multiple: true
+        },
+        {
+            name: 'children',
+            displayedText: 'Enfants',
+            type: 'select',
+            multiple: true
+        },
+        {
+            name: 'spouse',
+            displayedText: 'Conjoint(e)',
+            type: 'select'
+        },
+    ],
+    initialValues: {
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        address: '',
+        sex: '',
+        generation: '',
+        parents: '',
+        children: '',
+        spouse: ''
+    },
+    endpoint: '/api/members'
+}
+
+
 export const meetingFields = {
     fields: [
         {
@@ -71,6 +139,7 @@ export const meetingFields = {
     },
     endpoint: '/api/meetings'
 }
+
 
 export const contributionFields = {
     fields: [
