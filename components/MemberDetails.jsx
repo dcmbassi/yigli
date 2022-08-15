@@ -7,7 +7,7 @@ import MemberNameCell from './MemberNameCell'
 
 const MemberDetails = ({ member }) => {
     return (
-        <Box my={2} p={2} sx={{ width: '100%' }}>
+        <Box p={2} sx={{ width: '100%' }}>
             <Grid container p={2} my={2} spacing={{ xs: 2, md: 3 }} >
                 <Grid item xs={12} sm={4} md={3} >
                     <MemberImage />
