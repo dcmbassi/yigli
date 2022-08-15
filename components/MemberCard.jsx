@@ -5,7 +5,7 @@ import { Typography } from '@mui/material'
 
 const MemberCard = ({ member }) => {
     return (
-        <Card>
+        <Card sx={{height: '100%'}}>
             <CardActionArea>
                 <CardContent>
                     <Typography gutterBottom variant='h6' component='div'>
