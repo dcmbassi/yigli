@@ -1,4 +1,9 @@
+import Link from 'next/link';
+
 import Container from "@mui/material/Container"
+import Button from "@mui/material/Button"
+import Box from "@mui/material/Box"
+import EditIcon from '@mui/icons-material/Edit';
 
 import dbConnect from "../../../db/connect"
 
@@ -7,8 +12,20 @@ import MemberDetails from "../../../components/MemberDetails"
 
 const MemberDetailsPage = ({ member }) => {
     console.log({ member })
+    const editUrl = `/members/${member._id}/edit`
     return (
         <Container>
+            <Box px={4} mt={2} display='flex' justifyContent='flex-end'>
+                <Link href={editUrl} passHref>
+                    <Button
+                        variant='outlined'
+                        size='small'
+                        startIcon={<EditIcon />}
+                    >
+                        Modifier
+                    </Button>
+                </Link>
+            </Box>
             <MemberDetails member={member} />
         </Container>
     )
