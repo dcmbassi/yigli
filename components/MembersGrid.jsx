@@ -1,17 +1,33 @@
-import { Typography } from '@mui/material'
+import Typography from '@mui/material/Typography'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import Grid from '@mui/material/Grid'
 import Link from 'next/link'
 import MemberCard from './MemberCard'
 
+const addMemberUrl = '/addmember'
+
 const MembersGrid = ({ members }) => {
     return (
         <>
-            <Typography gutterBottom variant='h2' component='div' textAlign='center'>
+            <Typography variant='h2' mt={2} component='div' textAlign='center'>
                 Membres
             </Typography>
-            <Typography gutterBottom variant='caption' component='div' color='text.secondary'>
+            <Typography variant='caption' textAlign='center' component='div' color='text.secondary'>
                 Effectif: {members.length}
             </Typography>
+            <Box mt={2} display='flex' justifyContent='flex-end'>
+                <Link href={addMemberUrl} passHref>
+                    <Button
+                        variant='outlined'
+                        size='small'
+                        startIcon={<PersonAddIcon />}
+                    >
+                        Ajouter
+                    </Button>
+                </Link>
+            </Box>
             <Grid
                 container
                 py={2}
