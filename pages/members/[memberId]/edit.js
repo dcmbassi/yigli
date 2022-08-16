@@ -1,8 +1,12 @@
+import { Container } from "@mui/material"
+import EditMemberForm from "../../../components/forms/EditMemberForm"
 
 const EditMemberPage = () => {
-  return (
-    <div>Edit Member Page</div>
-  )
+    return (
+        <Container>
+            <EditMemberForm />
+        </Container>
+    )
 }
 
 export default EditMemberPage
