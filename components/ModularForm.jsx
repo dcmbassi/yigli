@@ -1,4 +1,16 @@
 import { useState, useEffect } from "react"
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import FormControl from '@mui/material/FormControl'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import FormLabel from '@mui/material/FormLabel'
+import InputLabel from '@mui/material/InputLabel'
+import NativeSelect from '@mui/material/NativeSelect'
+import Radio from '@mui/material/Radio'
+import RadioGroup from '@mui/material/RadioGroup'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
+
 import submitForm from "../src/utils/formSubmission"
 
 const ModularForm = (props) => {
@@ -27,15 +39,10 @@ const ModularForm = (props) => {
 
     const handleSubmit = async e => {
         e.preventDefault()
-
-        /*
-            TO DO:
-            1. Validate inputs
-        */
+        console.log(data.endpoint)
 
         try {
             const result = await submitForm(data.endpoint, formValues)
-            console.log(result)
             if (result.success) {
                 setSuccess(true)
                 resetFields()
@@ -47,33 +54,52 @@ const ModularForm = (props) => {
     }
 
     return (
-        <>
-            <form onSubmit={handleSubmit}>
+        <Box display='flex' justifyContent='center' mt={2}>
+            <Box component='form' width={300} onSubmit={handleSubmit}>
+                <Typography variant='h4' gutterBottom sx={{ textAlign: 'center' }}>
+                    Form Title
+                </Typography>
                 {data.fields.map(item => (
-                    <div key={item.name}>
+                    <Box key={item.name}>
                         {item.type === 'radio'
                             ? (
-                                <fieldset>
-                                    <legend>{item.displayedText}</legend>
-                                    {item.options.map(option => (
-                                        <p key={option.key}>
-                                            <input
-                                                type={item.type}
-                                                name={item.name}
-                                                id={option.value}
-                                                checked={formValues[item.name] === option.value}
+                                <FormControl>
+                                    <FormLabel id={item.name}>{item.displayedText}</FormLabel>
+                                    <RadioGroup row aria-labelledby={item.name} name={item.name}>
+                                        {item.options.map(option => (
+                                            <FormControlLabel
+                                                key={option.key}
                                                 value={option.value}
-                                                onChange={handleInputChange}
+                                                control={<Radio checked={formValues[item.name] === option.value} onChange={handleInputChange} />}
+                                                label={option.key}
                                             />
-                                            <label htmlFor={option.value}>{option.key}</label>
-                                        </p>
-                                    ))}
-                                </fieldset>
+                                        ))}
+                                    </RadioGroup>
+                                </FormControl>
                             )
                             : item.type === 'select'
                                 ? (
                                     <>
-                                        <label htmlFor={item.name}>{item.displayedText}: </label>
+                                        <FormControl>
+                                            <InputLabel variant='standard' htmlFor={item.name}>
+                                                {item.displayedText}
+                                            </InputLabel>
+                                            <NativeSelect
+                                                onChange={handleInputChange}
+                                                value={formValues[item.name]}
+                                                inputProps={{
+                                                    name: item.name,
+                                                    id: item.name
+                                                }}
+                                            >
+                                                {members.map(member => (
+                                                    <option key={member._id} value={member._id}>
+                                                        {`${member.firstName} ${member.lastName}`}
+                                                    </option>
+                                                ))}
+                                            </NativeSelect>
+                                        </FormControl>
+                                        {/* <label htmlFor={item.name}>{item.displayedText}: </label>
                                         <select
                                             name={item.name}
                                             id={item.name}
@@ -86,30 +112,36 @@ const ModularForm = (props) => {
                                                     {`${member.firstName} ${member.lastName}`}
                                                 </option>
                                             ))}
-                                        </select>
+                                        </select> */}
                                     </>
                                 )
                                 : (
-                                    <>
-                                        <label htmlFor={item.name}>{item.displayedText}: </label>
-                                        <input
-                                            type={item.type}
-                                            name={item.name}
-                                            id={item.name}
-                                            value={formValues[item.name]}
-                                            onChange={handleInputChange}
-                                        />
-                                    </>
+                                    <TextField
+                                        type={item.type}
+                                        label={item.displayedText}
+                                        name={item.name}
+                                        id={item.name}
+                                        value={formValues[item.name]}
+                                        onChange={handleInputChange}
+                                        size='small'
+                                        fullWidth
+                                    />
                                 )
                         }
                         <br />
                         <br />
-                    </div>
+                    </Box>
                 ))}
-                <input type="submit" value="Enregistrer" />
-            </form>
+                <Button
+                    variant='contained'
+                    type='submit'
+                    fullWidth
+                >
+                    Enregistrer
+                </Button>
+            </Box>
             <p>{successMessage}</p>
-        </>
+        </Box>
     )
 }
 
