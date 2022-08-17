@@ -36,7 +36,7 @@ const MembersGrid = ({ members }) => {
                 {members.map(member => (
                     <Grid
                         item
-                        key={member.id}
+                        key={member._id}
                         xs={12} sm={6} md={4} lg={3}
                     >
                         <Link href={`/members/${member._id}`} passHref>
