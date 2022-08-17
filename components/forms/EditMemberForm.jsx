@@ -12,7 +12,17 @@ import Stack from "@mui/material/Stack"
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
-const EditMemberForm = () => {
+/*
+    TO DO
+    1. Fix layout issues
+    2. Initialise component state to member prop attributes
+    3. Handle input changes
+    4. Validate inputs
+    5. Submit the form via a helper put function
+*/
+
+const EditMemberForm = ({member}) => {
+    console.log('Inner:', member)
     return (
         <Box display='flex' flexDirection='column' alignItems='center' mt={3}>
             <Box component='form' mb={2}>
