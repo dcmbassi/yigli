@@ -20,7 +20,7 @@ import { editFormReducer } from "../../src/reducers/editFormReducer"
     5. Submit the form via a helper put function
 */
 
-const EditMemberForm = ({ member }) => {
+const EditMemberForm = ({ member, spouseList }) => {
     const [state, dispatch] = useReducer(editFormReducer, member)
     console.log('State:', state)
     return (
@@ -86,6 +86,7 @@ const EditMemberForm = ({ member }) => {
                                     id='generation'
                                     label='Génération'
                                     name='generation'
+                                    value={state.generation || ''}
                                 >
                                     <option>LFDF</option>
                                     <option>DKKS</option>
@@ -100,6 +101,8 @@ const EditMemberForm = ({ member }) => {
                                     id='parents'
                                     label='Parents'
                                     name='parents'
+                                    multiple
+                                    value={state.parents}
                                 >
                                     <option>LFDF</option>
                                     <option>DKKS</option>
@@ -114,9 +117,13 @@ const EditMemberForm = ({ member }) => {
                                     id='spouse'
                                     label='Conjoint(e)'
                                     name='spouse'
+                                    value={state.spouse || ''} 
                                 >
-                                    <option>LFDF</option>
-                                    <option>DKKS</option>
+                                    {spouseList.map(s => (
+                                        <option key={s._id} value={s._id}>
+                                            {`${s.firstName} ${s.lastName}`}
+                                        </option>
+                                    ))}
                                 </Select>
                             </FormControl>
                             <FormControl size='small'>
@@ -128,6 +135,8 @@ const EditMemberForm = ({ member }) => {
                                     id='children'
                                     label='Children'
                                     name='children'
+                                    multiple
+                                    value={state.children}
                                 >
                                     <option>LFDF</option>
                                     <option>DKKS</option>
