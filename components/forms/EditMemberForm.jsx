@@ -4,6 +4,7 @@ import Button from '@mui/material/Button'
 import FormControl from '@mui/material/FormControl'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import FormLabel from '@mui/material/FormLabel'
+import Grid from '@mui/material/Grid'
 import InputLabel from '@mui/material/InputLabel'
 import NativeSelect from '@mui/material/NativeSelect'
 import Radio from '@mui/material/Radio'
@@ -21,7 +22,7 @@ import Typography from '@mui/material/Typography'
     5. Submit the form via a helper put function
 */
 
-const EditMemberForm = ({member}) => {
+const EditMemberForm = ({ member }) => {
     console.log('Inner:', member)
     return (
         <Box display='flex' flexDirection='column' alignItems='center' mt={3}>
@@ -29,49 +30,54 @@ const EditMemberForm = ({member}) => {
                 <Typography variant='h4' sx={{ textAlign: 'center' }} gutterBottom>
                     Modifier Membre
                 </Typography>
-                <Stack
-                    direction={{ xs: 'column', md: 'row' }}
+                <Grid
+                    container
                     spacing={4}
                     mb={4}
                 >
-                    <Stack direction='column' spacing={2}>
-                        <TextField
-                            type='text'
-                            name='firstName'
-                            label='Prénom'
-                            size='small'
-                            fullWidth
-                        />
-                        <TextField
-                            type='text'
-                            name='lastName'
-                            label='Nom'
-                            size='small'
-                            fullWidth
-                        />
-                        <TextField
-                            type='email'
-                            name='email'
-                            label='Email'
-                            size='small'
-                            fullWidth
-                        />
-                        <TextField
-                            type='text'
-                            name='address'
-                            label='Adresse'
-                            size='small'
-                            fullWidth
-                        />
-                    </Stack>
-                    <Stack direction='column' spacing={2}>
-                        <FormControl>
+                    <Grid item xs={12} md={6}>
+                        <Stack direction='column' spacing={3}>
+                            <TextField
+                                type='text'
+                                name='firstName'
+                                label='Prénom'
+                                size='small'
+                                fullWidth
+                            />
+                            <TextField
+                                type='text'
+                                name='lastName'
+                                label='Nom'
+                                size='small'
+                                fullWidth
+                            />
+                            <TextField
+                                type='email'
+                                name='email'
+                                label='Email'
+                                size='small'
+                                fullWidth
+                            />
+                            <TextField
+                                type='text'
+                                name='address'
+                                label='Adresse'
+                                size='small'
+                                fullWidth
+                            />
+                        </Stack>
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                        <Stack direction='column' spacing={2}>
+                        <FormControl size='small'>
                             <InputLabel variant='standard' htmlFor='generation'>
                                 Génération
                             </InputLabel>
                             <NativeSelect
                                 // onChange={handleInputChange}
                                 // value={formValues[item.name]}
+                                size="small"
+                                variant="filled"
                                 inputProps={{
                                     name: 'generation',
                                     id: 'generation'
@@ -88,7 +94,7 @@ const EditMemberForm = ({member}) => {
                                 </option>
                             </NativeSelect>
                         </FormControl>
-                        <FormControl>
+                        <FormControl size='small'>
                             <InputLabel variant='standard' htmlFor='parents'>
                                 Parents
                             </InputLabel>
@@ -111,7 +117,7 @@ const EditMemberForm = ({member}) => {
                                 </option>
                             </NativeSelect>
                         </FormControl>
-                        <FormControl>
+                        <FormControl size='small'>
                             <InputLabel variant='standard' htmlFor='spouse'>
                                 Conjoint(e)
                             </InputLabel>
@@ -134,7 +140,7 @@ const EditMemberForm = ({member}) => {
                                 </option>
                             </NativeSelect>
                         </FormControl>
-                        <FormControl>
+                        <FormControl size='small'>
                             <InputLabel variant='standard' htmlFor='children'>
                                 Enfants
                             </InputLabel>
@@ -157,8 +163,12 @@ const EditMemberForm = ({member}) => {
                                 </option>
                             </NativeSelect>
                         </FormControl>
-                    </Stack>
-                </Stack>
+                        </Stack>
+                    </Grid>
+                    {/* <Stack direction='column' spacing={2}>
+                        
+                    </Stack> */}
+                </Grid>
                 <Button
                     variant='contained'
                     type='submit'
