@@ -165,9 +165,6 @@ const EditMemberForm = ({ member }) => {
                         </FormControl>
                         </Stack>
                     </Grid>
-                    {/* <Stack direction='column' spacing={2}>
-                        
-                    </Stack> */}
                 </Grid>
                 <Button
                     variant='contained'
