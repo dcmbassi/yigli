@@ -12,18 +12,21 @@ import RadioGroup from '@mui/material/RadioGroup'
 import Stack from "@mui/material/Stack"
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
+import { useReducer } from "react"
+import { editFormReducer } from "../../src/reducers/editFormReducer"
 
 /*
     TO DO
-    1. Fix layout issues
     2. Initialise component state to member prop attributes
     3. Handle input changes
     4. Validate inputs
     5. Submit the form via a helper put function
+    6. Fix label presence issues in TextFields
 */
 
 const EditMemberForm = ({ member }) => {
-    console.log('Inner:', member)
+    const [state, dispatch] = useReducer(editFormReducer, member)
+    console.log('State:', state)
     return (
         <Box display='flex' flexDirection='column' alignItems='center' mt={3}>
             <Box component='form' mb={2}>
@@ -41,6 +44,8 @@ const EditMemberForm = ({ member }) => {
                                 type='text'
                                 name='firstName'
                                 label='Prénom'
+                                InputLabelProps={{ shrink:  true}}
+                                value={state.firstName}
                                 size='small'
                                 fullWidth
                             />
@@ -48,6 +53,8 @@ const EditMemberForm = ({ member }) => {
                                 type='text'
                                 name='lastName'
                                 label='Nom'
+                                InputLabelProps={{ shrink:  true}}
+                                value={state.lastName}
                                 size='small'
                                 fullWidth
                             />
@@ -55,6 +62,8 @@ const EditMemberForm = ({ member }) => {
                                 type='email'
                                 name='email'
                                 label='Email'
+                                InputLabelProps={{ shrink:  true}}
+                                value={state.email}
                                 size='small'
                                 fullWidth
                             />
@@ -62,6 +71,8 @@ const EditMemberForm = ({ member }) => {
                                 type='text'
                                 name='address'
                                 label='Adresse'
+                                InputLabelProps={{ shrink:  true}}
+                                value={state.address}
                                 size='small'
                                 fullWidth
                             />
@@ -77,7 +88,8 @@ const EditMemberForm = ({ member }) => {
                                 // onChange={handleInputChange}
                                 // value={formValues[item.name]}
                                 size="small"
-                                variant="filled"
+                                multiple
+                                variant="outlined"
                                 inputProps={{
                                     name: 'generation',
                                     id: 'generation'
