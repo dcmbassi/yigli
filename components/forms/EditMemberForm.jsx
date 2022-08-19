@@ -7,6 +7,7 @@ import FormControl from '@mui/material/FormControl'
 import Grid from '@mui/material/Grid'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
+import OutlinedInput from '@mui/material/OutlinedInput'
 import Select from '@mui/material/Select'
 import Stack from "@mui/material/Stack"
 import TextField from '@mui/material/TextField'
@@ -21,14 +22,21 @@ import { editFormReducer } from "../../src/reducers/editFormReducer"
     5. Submit the form via a helper put function
 */
 
-const EditMemberForm = ({ member, spouseList, generations }) => {
+const EditMemberForm = ({ member, spouseList, parentList, generations }) => {
     const [state, dispatch] = useReducer(editFormReducer, member)
-    
+
     console.log('State:', state)
 
-    const handleInputChange = (e) => {
+    const handleInputChange = e => {
+        const { name, value } = e.target
+        dispatch({ type: 'CHANGE_INPUT', payload: { name, value } })
+    }
+
+    const handleMultiChange = e => {
         const {name, value} = e.target
-        dispatch({type: 'CHANGE_INPUT', payload: {name, value}})
+        console.log({name})
+        const trueValue = typeof value === 'string' ? value.split(',') : value
+        console.log({trueValue});
     }
 
     return (
@@ -118,10 +126,15 @@ const EditMemberForm = ({ member, spouseList, generations }) => {
                                     label='Parents'
                                     name='parents'
                                     multiple
-                                    value={state.parents}
+                                    value={state.parents || ''}
+                                    onChange={handleMultiChange}
+                                    input={<OutlinedInput label='Parents' />}
                                 >
-                                    <option>LFDF</option>
-                                    <option>DKKS</option>
+                                    {parentList.map(p => (
+                                        <MenuItem key={p._id} value={p._id} >
+                                            {`${p.firstName} ${p.lastName}`}
+                                        </MenuItem>
+                                    ))}
                                 </Select>
                             </FormControl>
                             <FormControl size='small'>
