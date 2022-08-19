@@ -7,4 +7,7 @@ export const ENDPOINTS = {
 
     addContribution: 'api/contributions',
     editContribution: (contributionId) => `/api/contributions/${contributionId}`,
+
+    addGeneration: 'api/generations',
+    editGeneration: (generationId) => `/api/generations/${generationId}`
 }
