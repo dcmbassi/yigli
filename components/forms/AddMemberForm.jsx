@@ -34,7 +34,7 @@ const AddMemberForm = () => {
     const [successMessage, setSuccessMessage] = useState('')
 
     useEffect(() => {
-        if (success) setSuccessMessage('Member added.')
+        if (success) setSuccessMessage('Membre ajouté.')
         let delayedAction = setTimeout(() => {
             setSuccessMessage('')
             setSuccess(false)
