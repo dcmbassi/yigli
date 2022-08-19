@@ -10,12 +10,10 @@ const generationSchema = mongoose.Schema({
     contributionAmount: {
         type: Number
     },
-    lateFee: {
-        type: Number
+    dependent: {
+        type: Boolean
     },
-    absenteeFee: {
-        type: Number
-    },
+    
 }, {
     timestamps: true
 })
