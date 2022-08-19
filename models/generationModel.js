@@ -1,6 +1,9 @@
 import mongoose from "mongoose";
 
 const generationSchema = mongoose.Schema({
+    index: {
+        type: Number
+    },
     label: {
         type: String
     },
