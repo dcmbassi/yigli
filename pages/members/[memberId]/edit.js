@@ -5,13 +5,15 @@ import dbConnect from "../../../db/connect"
 import Member from '../../../models/memberModel'
 import Generation from '../../../models/generationModel'
 
-const EditMemberPage = ({ member, spouseList, generations }) => {
+const EditMemberPage = ({ member, spouseList, parentList, generations }) => {
+    
     return (
         <Container>
             <EditMemberForm
                 member={member}
                 spouseList={spouseList}
                 generations={generations}
+                parentList={parentList}
             />
         </Container>
     )
@@ -40,12 +42,14 @@ export const getServerSideProps = async (context) => {
         return member
     })
     const spouseList = otherMembers.filter(m => m.sex !== member.sex)
+    const parentList = [...otherMembers]
 
     return {
         props: {
             member: JSON.parse(JSON.stringify(member)),
             spouseList: JSON.parse(JSON.stringify(spouseList)),
             generations: JSON.parse(JSON.stringify(generations)),
+            parentList: JSON.parse(JSON.stringify(parentList)),
         }
     }
 }
