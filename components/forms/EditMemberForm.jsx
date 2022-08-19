@@ -6,6 +6,7 @@ import Button from '@mui/material/Button'
 import FormControl from '@mui/material/FormControl'
 import Grid from '@mui/material/Grid'
 import InputLabel from '@mui/material/InputLabel'
+import MenuItem from '@mui/material/MenuItem'
 import Select from '@mui/material/Select'
 import Stack from "@mui/material/Stack"
 import TextField from '@mui/material/TextField'
@@ -20,9 +21,16 @@ import { editFormReducer } from "../../src/reducers/editFormReducer"
     5. Submit the form via a helper put function
 */
 
-const EditMemberForm = ({ member, spouseList }) => {
+const EditMemberForm = ({ member, spouseList, generations }) => {
     const [state, dispatch] = useReducer(editFormReducer, member)
+    
     console.log('State:', state)
+
+    const handleInputChange = (e) => {
+        const {name, value} = e.target
+        dispatch({type: 'CHANGE_INPUT', payload: {name, value}})
+    }
+
     return (
         <Box display='flex' flexDirection='column' alignItems='center' mt={3}>
             <Box component='form' mb={2}>
@@ -43,6 +51,7 @@ const EditMemberForm = ({ member, spouseList }) => {
                                 label='Prénom'
                                 InputLabelProps={{ shrink: true }}
                                 value={state.firstName}
+                                onChange={handleInputChange}
                                 size='small'
                                 fullWidth
                             />
@@ -52,6 +61,7 @@ const EditMemberForm = ({ member, spouseList }) => {
                                 label='Nom'
                                 InputLabelProps={{ shrink: true }}
                                 value={state.lastName}
+                                onChange={handleInputChange}
                                 size='small'
                                 fullWidth
                             />
@@ -61,6 +71,7 @@ const EditMemberForm = ({ member, spouseList }) => {
                                 label='Email'
                                 InputLabelProps={{ shrink: true }}
                                 value={state.email}
+                                onChange={handleInputChange}
                                 size='small'
                                 fullWidth
                             />
@@ -70,6 +81,7 @@ const EditMemberForm = ({ member, spouseList }) => {
                                 label='Adresse'
                                 InputLabelProps={{ shrink: true }}
                                 value={state.address}
+                                onChange={handleInputChange}
                                 size='small'
                                 fullWidth
                             />
@@ -87,9 +99,13 @@ const EditMemberForm = ({ member, spouseList }) => {
                                     label='Génération'
                                     name='generation'
                                     value={state.generation || ''}
+                                    onChange={handleInputChange}
                                 >
-                                    <option>LFDF</option>
-                                    <option>DKKS</option>
+                                    {generations.map(g => (
+                                        <MenuItem key={g._id} value={g._id} >
+                                            {`${g.label} ${g.dependent ? 'à charge' : ''}`}
+                                        </MenuItem>
+                                    ))}
                                 </Select>
                             </FormControl>
                             <FormControl size='small'>
@@ -117,12 +133,13 @@ const EditMemberForm = ({ member, spouseList }) => {
                                     id='spouse'
                                     label='Conjoint(e)'
                                     name='spouse'
-                                    value={state.spouse || ''} 
+                                    value={state.spouse || ''}
+                                    onChange={handleInputChange}
                                 >
                                     {spouseList.map(s => (
-                                        <option key={s._id} value={s._id}>
+                                        <MenuItem key={s._id} value={s._id}>
                                             {`${s.firstName} ${s.lastName}`}
-                                        </option>
+                                        </MenuItem>
                                     ))}
                                 </Select>
                             </FormControl>
@@ -133,7 +150,7 @@ const EditMemberForm = ({ member, spouseList }) => {
                                 <Select
                                     labelId='children-label'
                                     id='children'
-                                    label='Children'
+                                    label='Enfants'
                                     name='children'
                                     multiple
                                     value={state.children}
@@ -145,7 +162,7 @@ const EditMemberForm = ({ member, spouseList }) => {
                         </Stack>
                     </Grid>
                 </Grid>
-                <Box maxWidth={400} mx='auto' mt={{xs: 2, md: 8}}>
+                <Box maxWidth={400} mx='auto' mt={{ xs: 2, md: 8 }}>
                     <Button
                         variant='contained'
                         type='submit'

@@ -1,9 +1,13 @@
 
 export const editFormReducer = (state, action) => {
     switch (action.type) {
+        
         case 'CHANGE_INPUT':
-            
-            break;
+        return {
+                ...state,
+                [action.payload.name]: action.payload.value
+            }
+
         case 'ADD_TO_ARRAY':
 
             break;
