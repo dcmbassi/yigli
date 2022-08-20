@@ -1,5 +1,6 @@
-import { useReducer } from "react"
+import { useReducer, useState } from "react"
 
+import { useTheme } from '@mui/material/styles'
 import Alert from "@mui/material/Alert"
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -20,12 +21,25 @@ import { editFormReducer } from "../../src/reducers/editFormReducer"
     3. Handle input changes
     4. Validate inputs
     5. Submit the form via a helper put function
+    6. Correct display when the content of the inputs gets too long
 */
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+    PaperProps: {
+        style: {
+            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+            width: 250,
+        },
+    },
+}
 
 const EditMemberForm = ({ member, spouseList, parentList, generations }) => {
     const [state, dispatch] = useReducer(editFormReducer, member)
+    const theme = useTheme()
+    const [personName, setPersonName] = useState([])
 
-    console.log('State:', state)
+    console.log(state.parents)
 
     const handleInputChange = e => {
         const { name, value } = e.target
@@ -33,10 +47,9 @@ const EditMemberForm = ({ member, spouseList, parentList, generations }) => {
     }
 
     const handleMultiChange = e => {
-        const {name, value} = e.target
-        console.log({name})
+        const { name, value } = e.target
         const trueValue = typeof value === 'string' ? value.split(',') : value
-        console.log({trueValue});
+        dispatch({type: 'CHANGE_ARRAY', payload: {name, trueValue}})
     }
 
     return (
@@ -126,12 +139,17 @@ const EditMemberForm = ({ member, spouseList, parentList, generations }) => {
                                     label='Parents'
                                     name='parents'
                                     multiple
+                                    multiline
                                     value={state.parents || ''}
                                     onChange={handleMultiChange}
                                     input={<OutlinedInput label='Parents' />}
+                                    MenuProps={MenuProps}
                                 >
                                     {parentList.map(p => (
-                                        <MenuItem key={p._id} value={p._id} >
+                                        <MenuItem
+                                            key={p._id}
+                                            value={p._id}
+                                        >
                                             {`${p.firstName} ${p.lastName}`}
                                         </MenuItem>
                                     ))}
