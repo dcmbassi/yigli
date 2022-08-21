@@ -5,4 +5,13 @@ const submitForm = async (endpoint, body) => {
     return data
 }
 
+const submitPutForm = async (endpoint, body) => {
+    const {data} = await axios.put(endpoint, body, { headers: { 'Content-Type': 'application/json' } })
+    return data
+}
+
 export default submitForm
+
+export {
+    submitPutForm
+}
