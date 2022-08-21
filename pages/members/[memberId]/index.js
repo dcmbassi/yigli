@@ -11,7 +11,6 @@ import Member from '../../../models/memberModel'
 import MemberDetails from "../../../components/MemberDetails"
 
 const MemberDetailsPage = ({ member }) => {
-    console.log({ member })
     const editUrl = `/members/${member._id}/edit`
     return (
         <Container>
