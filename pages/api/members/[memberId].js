@@ -20,7 +20,7 @@ const handler = async (req, res) => {
             try {
                 const member = await Member.findByIdAndUpdate(memberId, req.body, { new: true, runValidators: true })
                 if (!member) return res.status(400).json({ success: false, message: `Unable to find member with id ${memberId}` })
-                res.status(201).json({ success: true, data: member })
+                res.status(200).json({ success: true, data: member })
             } catch (error) {
                 res.status(400).json({ success: false, message: error.response.data })
             }
