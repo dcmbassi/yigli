@@ -42,7 +42,7 @@ const EditMemberForm = ({ member, spouseList, parentList, generations }) => {
     const router = useRouter()
 
     useEffect(() => {
-        if (success) setSuccessMessage('Membre modifié. Redirection...')
+        if (success) setSuccessMessage('Membre modifié. Redirection en cours...')
         let delayedAction = setTimeout(() => {
             setSuccessMessage('')
             setSuccess(false)
