@@ -1,6 +1,6 @@
-import { useReducer, useState } from "react"
+import { useEffect, useReducer, useState } from "react"
+import { useRouter } from "next/router"
 
-import { useTheme } from '@mui/material/styles'
 import Alert from "@mui/material/Alert"
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -15,12 +15,12 @@ import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
 import { editFormReducer } from "../../src/reducers/editFormReducer"
+import { submitPutForm } from "../../src/utils/formSubmission"
+import { ENDPOINTS } from "../../src/constants/endpoints"
 
 /*
     TO DO
-    3. Handle input changes
     4. Validate inputs
-    5. Submit the form via a helper put function
     6. Correct display when the content of the inputs gets too long
 */
 const ITEM_HEIGHT = 48;
@@ -36,10 +36,26 @@ const MenuProps = {
 
 const EditMemberForm = ({ member, spouseList, parentList, generations }) => {
     const [state, dispatch] = useReducer(editFormReducer, member)
-    const theme = useTheme()
-    const [personName, setPersonName] = useState([])
+    const [success, setSuccess] = useState(false)
+    const [successMessage, setSuccessMessage] = useState('')
+    const [complete, setComplete] = useState(false)
+    const router = useRouter()
 
-    console.log(state.parents)
+    useEffect(() => {
+        if (success) setSuccessMessage('Membre modifié. Redirection...')
+        let delayedAction = setTimeout(() => {
+            setSuccessMessage('')
+            setSuccess(false)
+        }, 2000)
+        return () => clearTimeout(delayedAction)
+    }, [success])
+
+    useEffect(() => {
+        let delayedRedirection = setTimeout(() => {
+            if (complete) router.push(`/members/${member._id}`)
+        }, 2100)        
+        return () => clearTimeout(delayedRedirection)
+    }, [complete, router, member._id])
 
     const handleInputChange = e => {
         const { name, value } = e.target
@@ -49,12 +65,28 @@ const EditMemberForm = ({ member, spouseList, parentList, generations }) => {
     const handleMultiChange = e => {
         const { name, value } = e.target
         const trueValue = typeof value === 'string' ? value.split(',') : value
-        dispatch({type: 'CHANGE_ARRAY', payload: {name, trueValue}})
+        dispatch({ type: 'CHANGE_ARRAY', payload: { name, trueValue } })
+    }
+
+    const submitIsDisabled = !(state.lastName && state.email)
+
+    const handleSubmit = async e => {
+        e.preventDefault()
+
+        try {
+            const result = await submitPutForm(ENDPOINTS.editMember(member._id), state)
+            if (result.success) {
+                setSuccess(true)
+                setComplete(true)
+            }
+        } catch (error) {
+
+        }
     }
 
     return (
         <Box display='flex' flexDirection='column' alignItems='center' mt={3}>
-            <Box component='form' mb={2}>
+            <Box component='form' onSubmit={handleSubmit} mb={2}>
                 <Typography variant='h4' sx={{ textAlign: 'center' }} gutterBottom>
                     Modifier Membre
                 </Typography>
@@ -176,7 +208,7 @@ const EditMemberForm = ({ member, spouseList, parentList, generations }) => {
                             </FormControl>
                             <FormControl size='small'>
                                 <InputLabel id='children-label' >
-                                    Children
+                                    Enfants
                                 </InputLabel>
                                 <Select
                                     labelId='children-label'
@@ -197,12 +229,14 @@ const EditMemberForm = ({ member, spouseList, parentList, generations }) => {
                     <Button
                         variant='contained'
                         type='submit'
+                        disabled={submitIsDisabled}
                         fullWidth
                     >
                         Enregistrer Changements
                     </Button>
                 </Box>
             </Box>
+            {success && <Alert severity='success'>{successMessage}</Alert>}
         </Box>
     )
 }
