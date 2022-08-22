@@ -13,7 +13,13 @@ const formatCurrency = (amount, currency = 'FCFA') => {
     return `${amount} ${currency}`
 }
 
+const addProperty = (propName, target, source) => {
+    console.log('adding...');
+    target[propName] = {...source}
+}
+
 export {
     extractDate,
-    formatCurrency
+    formatCurrency,
+    addProperty
 }
