@@ -34,7 +34,7 @@ const MenuProps = {
     },
 }
 
-const EditMemberForm = ({ member, spouseList, parentList, generations }) => {
+const EditMemberForm = ({ member, spouseList, parentList, childrenList, generations }) => {
     const [state, dispatch] = useReducer(editFormReducer, member)
     const [success, setSuccess] = useState(false)
     const [successMessage, setSuccessMessage] = useState('')
@@ -72,7 +72,7 @@ const EditMemberForm = ({ member, spouseList, parentList, generations }) => {
 
     const handleSubmit = async e => {
         e.preventDefault()
-
+        delete state.gen
         try {
             const result = await submitPutForm(ENDPOINTS.editMember(member._id), state)
             if (result.success) {
@@ -153,6 +153,7 @@ const EditMemberForm = ({ member, spouseList, parentList, generations }) => {
                                     name='generation'
                                     value={state.generation || ''}
                                     onChange={handleInputChange}
+                                    MenuProps={MenuProps}
                                 >
                                     {generations.map(g => (
                                         <MenuItem key={g._id} value={g._id} >
@@ -198,6 +199,7 @@ const EditMemberForm = ({ member, spouseList, parentList, generations }) => {
                                     name='spouse'
                                     value={state.spouse || ''}
                                     onChange={handleInputChange}
+                                    MenuProps={MenuProps}
                                 >
                                     {spouseList.map(s => (
                                         <MenuItem key={s._id} value={s._id}>
@@ -216,10 +218,19 @@ const EditMemberForm = ({ member, spouseList, parentList, generations }) => {
                                     label='Enfants'
                                     name='children'
                                     multiple
-                                    value={state.children}
+                                    value={state.children || ''}
+                                    onChange={handleMultiChange}
+                                    input={<OutlinedInput label='Parents' />}
+                                    MenuProps={MenuProps}
                                 >
-                                    <option>LFDF</option>
-                                    <option>DKKS</option>
+                                    {childrenList.map(c => (
+                                        <MenuItem
+                                            key={c._id}
+                                            value={c._id}
+                                        >
+                                            {`${c.firstName} ${c.lastName}`}
+                                        </MenuItem>
+                                    ))}
                                 </Select>
                             </FormControl>
                         </Stack>
