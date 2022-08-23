@@ -37,7 +37,7 @@ const MembersGrid = ({ members }) => {
                     <Grid
                         item
                         key={member._id}
-                        xs={12} sm={6} md={4} lg={3}
+                        xs={12} sm={6} md={4} 
                     >
                         <Link href={`/members/${member._id}`} passHref>
                             <a style={{textDecoration: 'none'}}>
