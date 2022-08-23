@@ -4,9 +4,8 @@ import EditMemberForm from "../../../components/forms/EditMemberForm"
 import dbConnect from "../../../db/connect"
 import Member from '../../../models/memberModel'
 import Generation from '../../../models/generationModel'
-import { addProperty } from "../../../src/utils/helpers"
 
-const EditMemberPage = ({ member, spouseList, parentList, generations }) => {
+const EditMemberPage = ({ member, spouseList, parentList, childrenList, generations }) => {
     return (
         <Container>
             <EditMemberForm
@@ -14,6 +13,7 @@ const EditMemberPage = ({ member, spouseList, parentList, generations }) => {
                 spouseList={spouseList}
                 generations={generations}
                 parentList={parentList}
+                childrenList={childrenList}
             />
         </Container>
     )
@@ -28,25 +28,25 @@ export const getServerSideProps = async (context) => {
 
     const [member, memberResult, generations] = await Promise.all([
         Member.findById(memberId).lean(),
-        Member.find(),
+        Member.find().lean(),
         Generation.find().lean()
     ])
 
     delete member.password
     delete member.createdAt
     delete member.updatedAt
-
-    // member.gen = {...generations.find(g => g._id.toString() === member.generation.toString())}
-    addProperty('gen', member, generations.find(g => g._id.toString() === member.generation.toString()))
+    member.gen = { ...generations.find(g => g._id.toString() === member.generation?.toString()) }
 
     const otherMembers = memberResult.map(doc => {
-        const member = doc.toObject()
-        member._id = member._id.toString()
-        addProperty('gen', member, generations.find(g => g._id.toString() === member.generation.toString()))
-        return member
+        const mem = {...doc}
+        mem.gen = { ...generations.find(g => g._id.toString() === mem.generation?.toString()) }
+        
+        return mem
     })
-    const spouseList = otherMembers.filter(m => m.sex !== member.sex)
-    const parentList = [...otherMembers]
+
+    const spouseList = otherMembers.filter(m => (m.sex !== member.sex) && (m.gen.index === member.gen.index))
+    const parentList = otherMembers.filter(m => m.gen.index === member.gen.index - 1)
+    const childrenList = otherMembers.filter(m => m.gen.index === member.gen.index + 1)
 
     return {
         props: {
@@ -54,6 +54,7 @@ export const getServerSideProps = async (context) => {
             spouseList: JSON.parse(JSON.stringify(spouseList)),
             generations: JSON.parse(JSON.stringify(generations)),
             parentList: JSON.parse(JSON.stringify(parentList)),
+            childrenList: JSON.parse(JSON.stringify(childrenList)),
         }
     }
 }
