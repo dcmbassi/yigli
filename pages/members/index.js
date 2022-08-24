@@ -1,7 +1,6 @@
 import Container from '@mui/material/Container';
 
 import Member from '../../models/memberModel'
-import styles from '../../styles/Home.module.css'
 import dbConnect from '../../db/connect'
 import Meta from '../../layouts/Meta'
 import MembersGrid from '../../components/MembersGrid'
@@ -22,12 +21,7 @@ export default MembersPage
 export const getServerSideProps = async () => {
     await dbConnect()
 
-    const memberResult = await Member.find()
-    const members = memberResult.map(doc => {
-        const member = doc.toObject()
-        member._id = member._id.toString()
-        return member
-    })
+    const members = await Member.find().populate('generation', 'index label contributionAmount').lean()
 
     return {
         props: { members: JSON.parse(JSON.stringify(members)) }
