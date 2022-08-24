@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
+const {Schema} = mongoose
 
-const generationSchema = mongoose.Schema({
+const generationSchema = new Schema({
     index: {
         type: Number
     },
