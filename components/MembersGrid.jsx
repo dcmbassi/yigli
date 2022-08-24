@@ -2,13 +2,18 @@ import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import Grid from '@mui/material/Grid'
 import Link from 'next/link'
-import MemberCard from './MemberCard'
+import MemberSubgrid from './MemberSubgrid';
 
 const addMemberUrl = '/addmember'
 
 const MembersGrid = ({ members }) => {
+    const matriarch = members.filter(m => m.generation?.index === 0)
+    const gen1 = members.filter(m => m.generation?.index === 1)
+    const gen2 = members.filter(m => m.generation?.index === 2)
+    const gen3 = members.filter(m => m.generation?.index === 3)
+    const unranked = members.filter(m => Object.keys(m.generation).length === 0)
+
     return (
         <>
             <Typography variant='h2' mt={2} component='div' textAlign='center'>
@@ -28,25 +33,11 @@ const MembersGrid = ({ members }) => {
                     </Button>
                 </Link>
             </Box>
-            <Grid
-                container
-                py={2}
-                spacing={{ xs: 2, md: 3 }}
-            >
-                {members.map(member => (
-                    <Grid
-                        item
-                        key={member._id}
-                        xs={12} sm={6} md={4} 
-                    >
-                        <Link href={`/members/${member._id}`} passHref>
-                            <a style={{textDecoration: 'none'}}>
-                            <MemberCard member={member} />
-                            </a>
-                        </Link>
-                    </Grid>
-                ))}
-            </Grid>
+            {!!matriarch.length && <MemberSubgrid members={matriarch} heading='Matriarche' />}
+            {!!gen1.length && <MemberSubgrid members={gen1} heading='Enfants' />}
+            {!!gen2.length && <MemberSubgrid members={gen2} heading='Petits-enfants' />}
+            {!!gen3.length && <MemberSubgrid members={gen3} heading='Arrière-petits-enfants' />}
+            {!!unranked.length && <MemberSubgrid members={unranked} heading='Non classés' />}
         </>
     )
 }
