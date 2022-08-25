@@ -1,11 +1,14 @@
-import Grid from '@mui/material/Grid'
 import Box from '@mui/system/Box'
+import Grid from '@mui/material/Grid'
 import Stack from "@mui/material/Stack"
+import Typography from '@mui/material/Typography'
+
 import MemberContributionCell from './MemberContributionCell'
 import MemberImage from './MemberImage'
 import MemberNameCell from './MemberNameCell'
 
 const MemberDetails = ({ member }) => {
+    console.log(member);
     return (
         <Box p={2} sx={{ width: '100%' }}>
             <Grid container p={2} my={2} spacing={{ xs: 2, md: 3 }} >
@@ -28,7 +31,9 @@ const MemberDetails = ({ member }) => {
                 </Grid>
                 <Grid item xs={12} sm={4} md={3} >
                     <Box sx={{ height: '100%', background: '#ddd' }}>
-                        Pedigree
+                        {!!member.parents.length && member.parents.map(parent =>(
+                            <Typography key={parent._id}>{parent.firstName}</Typography>
+                        ))}
                     </Box>
                 </Grid>
                 <Grid item xs={12} sm={8} md={9} >
