@@ -37,11 +37,13 @@ export const getServerSideProps = async (context) => {
 
     await dbConnect()
 
-    const member = await Member.findById(memberId).lean()
+    const member = await Member.findById(memberId)
+        .populate('parents', 'firstName lastName')
+        .populate('children', 'firstName lastName')
+        .lean()
     delete member.password
 
     return {
         props: { member: JSON.parse(JSON.stringify(member)) }
     }
-
 }
