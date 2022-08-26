@@ -13,9 +13,9 @@ const MemberSublist = ({ members, title }) => {
             <List dense={true} subheader={title} sx={{ display: { xs: 'flex', sm: 'block' } }}>
                 {members.map(member => (
                     <Link key={member._id} href={`/members/${member._id}`}>
-                        <ListItem 
-                        button={true} 
-                        sx={{boxShadow: 1, borderRadius: '8px', marginBottom: '4px'}}
+                        <ListItem
+                            button={true}
+                            sx={{ boxShadow: 1, borderRadius: '8px', marginBottom: '4px' }}
                         >
                             <ListItemAvatar >
                                 <Avatar alt={member.firstName} src='/img/sample.jpg' />
