@@ -1,14 +1,13 @@
 import Box from '@mui/system/Box'
 import Grid from '@mui/material/Grid'
 import Stack from "@mui/material/Stack"
-import Typography from '@mui/material/Typography'
 
 import MemberContributionCell from './MemberContributionCell'
 import MemberImage from './MemberImage'
 import MemberNameCell from './MemberNameCell'
+import MemberSublist from './MemberSublist'
 
 const MemberDetails = ({ member }) => {
-    console.log(member);
     return (
         <Box p={2} sx={{ width: '100%' }}>
             <Grid container p={2} my={2} spacing={{ xs: 2, md: 3 }} >
@@ -30,10 +29,9 @@ const MemberDetails = ({ member }) => {
                     </Stack>
                 </Grid>
                 <Grid item xs={12} sm={4} md={3} >
-                    <Box sx={{ height: '100%', background: '#ddd' }}>
-                        {!!member.parents.length && member.parents.map(parent =>(
-                            <Typography key={parent._id}>{parent.firstName}</Typography>
-                        ))}
+                    <Box sx={{ height: '100%' }}>
+                        {!!member.parents.length && <MemberSublist members={member.parents} title='Parents' />}
+                        {!!member.children.length && <MemberSublist members={member.children} title='Enfants' />}
                     </Box>
                 </Grid>
                 <Grid item xs={12} sm={8} md={9} >
