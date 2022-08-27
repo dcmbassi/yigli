@@ -1,3 +1,6 @@
+import { useEffect, useReducer, useState } from "react"
+import { useRouter } from "next/router"
+
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import FormControl from '@mui/material/FormControl'
@@ -7,6 +10,7 @@ import Select from '@mui/material/Select'
 import Stack from "@mui/material/Stack"
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
+import { formReducer } from "../../src/reducers/formReducer"
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -20,6 +24,17 @@ const MenuProps = {
 }
 
 const AddContributionForm = () => {
+    const router = useRouter()
+    const {memberId} = router.query
+    const initialState = {
+        contributor: memberId ? memberId : '', 
+        amount: '', 
+        date: ''
+    }
+    const [state, dispatch] = useReducer(formReducer, initialState)
+    console.log(state)
+    
+
     return (
         <Box display='flex' flexDirection='column' alignItems='center' mt={3}>
             <Box component='form'>
