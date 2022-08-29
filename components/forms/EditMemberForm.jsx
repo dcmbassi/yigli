@@ -80,7 +80,7 @@ const EditMemberForm = ({ member, spouseList, parentList, childrenList, generati
                 setComplete(true)
             }
         } catch (error) {
-
+            console.log(error.message)
         }
     }
 
