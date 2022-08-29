@@ -12,7 +12,7 @@ const addcontribution = ({members}) => {
     return (
         <Container>
             {/* <ModularForm data={contributionFields} members={members}/> */}
-            <AddContributionForm />
+            <AddContributionForm members={members}/>
         </Container>
     )
 }
