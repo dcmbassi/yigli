@@ -1,17 +1,13 @@
 import Container from '@mui/material/Container'
 
-import ModularForm from '../components/ModularForm'
 import Member from '../models/memberModel'
-import styles from '../styles/Home.module.css'
 import dbConnect from '../db/connect'
-import { contributionFields } from "../src/utils/formData";
 import AddContributionForm from '../components/forms/AddContributionForm'
 
 
 const addcontribution = ({members}) => {
     return (
         <Container>
-            {/* <ModularForm data={contributionFields} members={members}/> */}
             <AddContributionForm members={members}/>
         </Container>
     )
