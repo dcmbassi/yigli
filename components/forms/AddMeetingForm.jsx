@@ -13,6 +13,8 @@ import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import { formReducer } from "../../src/reducers/formReducer"
 import { ACTIONS } from "../../src/constants/reducerActions"
+import submitForm from "../../src/utils/formSubmission"
+import { ENDPOINTS } from "../../src/constants/endpoints"
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -31,11 +33,10 @@ const initialState = {
     hosts: []
 }
 
-const AddMeetingForm = () => {
+const AddMeetingForm = ({members}) => {
     const [state, dispatch] = useReducer(formReducer, initialState)
     const [success, setSuccess] = useState(false)
     const [successMessage, setSuccessMessage] = useState('')
-    console.log(state)
 
     useEffect(() => {
         if (success) setSuccessMessage('Réunion enregistrée')
@@ -57,9 +58,28 @@ const AddMeetingForm = () => {
         dispatch({type: ACTIONS.CHANGE_ARRAY, payload: {name, trueValue}})
     }
 
+    const resetFields = () => {
+        dispatch({type: ACTIONS.RESET, payload: initialState})
+    }
+
+    const submitIsDisabled = !(state.date && state.location && !!state.hosts.length)
+
+    const handleSubmit = async e => {
+        e.preventDefault()
+        try {
+            const result = await submitForm(ENDPOINTS.addMeeting, state)
+            if (result.success) {
+                setSuccess(true)
+                resetFields()
+            }
+        } catch (error) {
+            
+        }
+    }
+
     return (
         <Box display='flex' flexDirection='column' alignItems='center' mt={3}>
-            <Box component='form' mb={2}>
+            <Box component='form' onSubmit={handleSubmit} mb={2}>
                 <Typography variant='h4' sx={{ textAlign: 'center' }} gutterBottom>
                     Nouvelle Réunion
                 </Typography>
@@ -99,22 +119,25 @@ const AddMeetingForm = () => {
                             input={<OutlinedInput label='Hôtes' />}
                             MenuProps={MenuProps}
                         >
-                            <MenuItem value='Dave'>Dave</MenuItem>
-                            <MenuItem value='Wally'>Wally</MenuItem>
-                            <MenuItem value='Azra'>Azra</MenuItem>
-                           
+                            {members.map(m => (
+                                <MenuItem key={m._id} value={m._id}>
+                                    {`${m.firstName} ${m.lastName}`}
+                                </MenuItem>
+                            ))}
                         </Select>
                     </FormControl>
 
                     <Button
                         variant='contained'
                         type='submit'
+                        disabled={submitIsDisabled}
                         fullWidth
                     >
                         Enregistrer Réunion
                     </Button>
                 </Stack>
             </Box>
+            {success && <Alert severity='success'>{successMessage}</Alert>}
         </Box>
     )
 }
