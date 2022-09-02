@@ -1,4 +1,4 @@
-import { Container } from "@mui/material"
+import Container from "@mui/material/Container"
 import EditMemberForm from "../../../components/forms/EditMemberForm"
 
 import dbConnect from "../../../db/connect"
