@@ -3,10 +3,9 @@ import Link from 'next/link';
 import Container from "@mui/material/Container"
 import Button from "@mui/material/Button"
 import Box from "@mui/material/Box"
-import EditIcon from '@mui/icons-material/Edit';
+import EditIcon from '@mui/icons-material/Edit'
 
 import dbConnect from "../../../db/connect"
-
 import Member from '../../../models/memberModel'
 import MemberDetails from "../../../components/MemberDetails"
 
