@@ -30,7 +30,7 @@ const handler = async (req, res) => {
             try {
                 const deletedMember = await Member.findByIdAndDelete(memberId)
                 if (!deletedMember) return res.status(400).json({ success: false, message: `Unable to find member with id ${memberId}` })
-                res.status(201).json({ success: true })
+                res.status(200).json({ success: true })
             } catch (error) {
                 res.status(400).json({ success: false, message: error.response.data })
             }

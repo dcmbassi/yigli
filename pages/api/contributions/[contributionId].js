@@ -20,7 +20,7 @@ const handler = async (req, res) => {
             try {
                 const contribution = await Contribution.findByIdAndUpdate(contributionId, req.body, { new: true, runValidators: true })
                 if (!contribution) return res.status(400).json({ success: false, message: `Unable to find contribution with id ${contributionId}` })
-                res.status(201).json({ success: true, data: contribution })
+                res.status(200).json({ success: true, data: contribution })
             } catch (error) {
                 res.status(400).json({ success: false, message: error.response.data })
             }
@@ -30,7 +30,7 @@ const handler = async (req, res) => {
             try {
                 const deletedcontribution = await Contribution.findByIdAndDelete(contributionId)
                 if (!deletedcontribution) return res.status(400).json({ success: false, message: `Unable to find contribution with id ${contributionId}` })
-                res.status(201).json({ success: true })
+                res.status(200).json({ success: true })
             } catch (error) {
                 res.status(400).json({ success: false, message: error.response.data })
             }

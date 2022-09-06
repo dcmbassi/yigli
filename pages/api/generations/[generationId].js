@@ -20,7 +20,7 @@ const handler = async (req, res) => {
             try {
                 const generation = await Generation.findByIdAndUpdate(generationId, req.body, { new: true, runValidators: true })
                 if (!generation) return res.status(400).json({ success: false, message: `Unable to find generation with id ${generationId}` })
-                res.status(201).json({ success: true, data: generation })
+                res.status(200).json({ success: true, data: generation })
             } catch (error) {
                 res.status(400).json({ success: false, message: error.response.data })
             }
@@ -30,7 +30,7 @@ const handler = async (req, res) => {
             try {
                 const deletedgeneration = await Generation.findByIdAndDelete(generationId)
                 if (!deletedgeneration) return res.status(400).json({ success: false, message: `Unable to find generation with id ${generationId}` })
-                res.status(201).json({ success: true })
+                res.status(200).json({ success: true })
             } catch (error) {
                 res.status(400).json({ success: false, message: error.response.data })
             }

@@ -20,7 +20,7 @@ const handler = async (req, res) => {
             try {
                 const expense = await Expense.findByIdAndUpdate(expenseId, req.body, { new: true, runValidators: true })
                 if (!expense) return res.status(400).json({ success: false, message: `Unable to find expense with id ${expenseId}` })
-                res.status(201).json({ success: true, data: expense })
+                res.status(200).json({ success: true, data: expense })
             } catch (error) {
                 res.status(400).json({ success: false, message: error.response.data })
             }
@@ -30,7 +30,7 @@ const handler = async (req, res) => {
             try {
                 const deletedexpense = await Expense.findByIdAndDelete(expenseId)
                 if (!deletedexpense) return res.status(400).json({ success: false, message: `Unable to find expense with id ${expenseId}` })
-                res.status(201).json({ success: true })
+                res.status(200).json({ success: true })
             } catch (error) {
                 res.status(400).json({ success: false, message: error.response.data })
             }
