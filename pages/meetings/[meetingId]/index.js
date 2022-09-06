@@ -8,6 +8,7 @@ import EditIcon from '@mui/icons-material/Edit'
 import dbConnect from '../../../db/connect'
 import Meeting from '../../../models/meetingModel'
 import Member from '../../../models/memberModel'
+import MeetingDetails from '../../../components/MeetingDetails';
 
 const MeetingDetailsPage = ({ meeting }) => {
     const editUrl = `/meetings/${meeting._id}/edit`
@@ -24,7 +25,7 @@ const MeetingDetailsPage = ({ meeting }) => {
                     </Button>
                 </Link>
             </Box>
-
+            <MeetingDetails meeting={meeting} />
         </Container>
     )
 }
