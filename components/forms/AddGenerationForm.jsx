@@ -1,6 +1,6 @@
 import { useEffect, useReducer, useState } from 'react'
 
-import Alert from "@mui/material/Alert"
+import Alert from '@mui/material/Alert'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Checkbox from '@mui/material/Checkbox'
@@ -8,9 +8,9 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
-import { ENDPOINTS } from "../../src/constants/endpoints"
-import { genFormReducer } from "../../src/reducers/genFormReducer"
-import submitForm from "../../src/utils/formSubmission"
+import { ENDPOINTS } from '../../src/constants/endpoints'
+import { genFormReducer } from '../../src/reducers/genFormReducer'
+import submitForm from '../../src/utils/formSubmission'
 
 const initialState = {
     index: '',

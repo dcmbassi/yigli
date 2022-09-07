@@ -1,7 +1,7 @@
-import { useEffect, useReducer, useState } from "react"
-import { useRouter } from "next/router"
+import { useEffect, useReducer, useState } from 'react'
+import { useRouter } from 'next/router'
 
-import Alert from "@mui/material/Alert"
+import Alert from '@mui/material/Alert'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import FormControl from '@mui/material/FormControl'
@@ -14,9 +14,9 @@ import Stack from "@mui/material/Stack"
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
-import { editFormReducer } from "../../src/reducers/editFormReducer"
-import { submitPutForm } from "../../src/utils/formSubmission"
-import { ENDPOINTS } from "../../src/constants/endpoints"
+import { editFormReducer } from '../../src/reducers/editFormReducer'
+import { submitPutForm } from '../../src/utils/formSubmission'
+import { ENDPOINTS } from '../../src/constants/endpoints'
 
 /*
     TO DO

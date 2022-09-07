@@ -12,7 +12,7 @@ import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import OutlinedInput from '@mui/material/OutlinedInput'
 import Select from '@mui/material/Select'
-import Stack from "@mui/material/Stack"
+import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
@@ -28,6 +28,12 @@ const MenuProps = {
 }
 
 const EditMeetingForm = () => {
+
+
+    const handleSubmit = async e => {
+        e.preventDefault()
+
+    }
     return (
         <Box display='flex' flexDirection='column' alignItems='center' mt={3}>
             <Box component='form' onSubmit={handleSubmit} mb={2}>
@@ -62,7 +68,7 @@ const EditMeetingForm = () => {
                                     id='hosts'
                                     label='Hôtes'
                                     name='hosts'
-                                    multiple
+                                    // multiple
                                     input={<OutlinedInput label='Hôtes' />}
                                     MenuProps={MenuProps}
                                 >
