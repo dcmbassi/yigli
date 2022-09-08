@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from 'react'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import FormControl from '@mui/material/FormControl'
@@ -11,7 +11,7 @@ import RadioGroup from '@mui/material/RadioGroup'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
-import submitForm from "../src/utils/formSubmission"
+import submitForm from '../src/utils/formSubmission'
 
 const ModularForm = (props) => {
     const { data, members } = props

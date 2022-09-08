@@ -1,14 +1,14 @@
 import Link from 'next/link'
 
 import Button from '@mui/material/Button'
-import TableRow from "@mui/material/TableRow"
-import Table from "@mui/material/Table"
-import TableContainer from "@mui/material/TableContainer"
-import TableHead from "@mui/material/TableHead"
-import TableCell from "@mui/material/TableCell"
-import TableBody from "@mui/material/TableBody"
+import TableRow from '@mui/material/TableRow'
+import Table from '@mui/material/Table'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TableCell from '@mui/material/TableCell'
+import TableBody from '@mui/material/TableBody'
 import InfoIcon from '@mui/icons-material/Info'
-import { extractDate } from "../src/utils/helpers"
+import { extractDate } from '../src/utils/helpers'
 
 const MeetingsTable = ({ meetings }) => {
 

@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box'
-import Stack from "@mui/material/Stack"
-import Typography from "@mui/material/Typography"
+import Stack from '@mui/material/Stack'
+import Typography from '@mui/material/Typography'
 import { extractDate } from '../src/utils/helpers'
 
 const MeetingDetails = ({meeting}) => {

@@ -1,6 +1,6 @@
-import Stack from "@mui/material/Stack"
-import Typography from "@mui/material/Typography";
-import LocationOnIcon from '@mui/icons-material/LocationOn';
+import Stack from '@mui/material/Stack'
+import Typography from '@mui/material/Typography'
+import LocationOnIcon from '@mui/icons-material/LocationOn'
 
 const MemberNameCell = ({ memberName, memberAddress }) => {
     return (
