@@ -93,7 +93,7 @@ const EditMeetingForm = () => {
                     </Grid>
                 </Grid>
                 <Box maxWidth={400} mx='auto' mt={{ xs: 2, md: 8 }}>
-                    <Button variant='contained' type='submit' fullwidth>
+                    <Button variant='contained' type='submit' fullwidth='true'>
                         Enregistrer Changements
                     </Button>
                 </Box>
