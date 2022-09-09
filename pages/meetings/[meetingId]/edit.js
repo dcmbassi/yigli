@@ -6,7 +6,6 @@ import Meeting from '../../../models/meetingModel'
 
 
 const EditMeetingPage = ({meeting}) => {
-    console.log({meeting})
     return (
         <Container>
             <EditMeetingForm />
