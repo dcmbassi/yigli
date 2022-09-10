@@ -14,7 +14,7 @@ const MeetingDetails = ({meeting}) => {
                 <Typography variant='h6' textAlign='center'>
                     {meeting.location}
                 </Typography>
-                <Box>
+                <Box>{meeting.hosts.length < 2 ? 'Hôte: ': 'Hôtes: '}
                     {meeting.hosts.map(host => (
                         <Typography key={host._id}>
                             {`${host.firstName} ${host.lastName}`}
