@@ -1,5 +1,5 @@
 import { useEffect, useReducer, useState } from 'react'
-import { useRouoter } from 'next/router'
+import { useRouter } from 'next/router'
 
 import Alert from '@mui/material/Alert'
 import Box from '@mui/material/Box'
@@ -28,7 +28,7 @@ const MenuProps = {
 }
 
 const EditMeetingForm = () => {
-
+    const router = useRouter()
 
     const handleSubmit = async e => {
         e.preventDefault()
