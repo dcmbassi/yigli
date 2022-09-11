@@ -15,6 +15,7 @@ import Select from '@mui/material/Select'
 import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
+import { formReducer } from '../../src/reducers/formReducer'
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -27,8 +28,30 @@ const MenuProps = {
     },
 }
 
-const EditMeetingForm = () => {
+const EditMeetingForm = ({meeting}) => {
+    const [state, dispatch] = useReducer(formReducer, meeting)
+    const [success, setSuccess] = useState(false)
+    const [successMessage, setSuccessMessage] = useState('')
+    const [complete, setComplete] = useState(false)
     const router = useRouter()
+
+    useEffect(() => {
+        if (success) setSuccessMessage('Réunion modifiée. Redirection en cours...')
+        let delayedAction = setTimeout(() => {
+            setSuccessMessage('')
+            setSuccess(false)
+        }, 2000)
+        return () => clearTimeout(delayedAction)
+    }, [success])
+
+    useEffect(() => {
+        let delayedRedirection = setTimeout(() => {
+            if (complete) router.push(`/meetings/${meeting._id}`)
+        }, 2100)        
+        return () => clearTimeout(delayedRedirection)
+    }, [complete, router, meeting._id])
+
+
 
     const handleSubmit = async e => {
         e.preventDefault()
@@ -98,6 +121,7 @@ const EditMeetingForm = () => {
                     </Button>
                 </Box>
             </Box>
+            {success && <Alert severity='success'>{successMessage}</Alert>}
         </Box>
     )
 }
