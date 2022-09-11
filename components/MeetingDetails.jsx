@@ -1,7 +1,11 @@
 import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
+import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd'
+
 import { extractDate } from '../src/utils/helpers'
+import MinuteList from './MinuteList'
 
 const MeetingDetails = ({meeting}) => {
   return (
@@ -23,8 +27,30 @@ const MeetingDetails = ({meeting}) => {
                 </Box>
             </Stack>
 
-            <Stack>
-
+            <Stack py={2} spacing={2}>
+                <Box display='flex' justifyContent='space-between'>
+                    <Typography>
+                        Retards: <span>5</span>
+                    </Typography>
+                    <Typography>
+                        Absences: <span>3</span>
+                    </Typography>
+                </Box>
+                <Box>
+                    <Typography variant='h6' textAlign='center'>
+                        Procès-verbal
+                    </Typography>
+                    <Box>
+                        <MinuteList />
+                        <Button
+                            variant='outlined'
+                            size='small'
+                            startIcon={<PlaylistAddIcon />}
+                        >
+                            Ajouter Objet
+                        </Button>
+                    </Box>
+                </Box>
             </Stack>
         </Stack>
     </Box>
