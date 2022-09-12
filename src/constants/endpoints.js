@@ -9,5 +9,8 @@ export const ENDPOINTS = {
     editContribution: (contributionId) => `/api/contributions/${contributionId}`,
 
     addGeneration: 'api/generations',
-    editGeneration: (generationId) => `/api/generations/${generationId}`
+    editGeneration: (generationId) => `/api/generations/${generationId}`,
+
+    addAgendaItem: 'api/agendaitems',
+    editAgendaItem: (agendaItemId) => `/api/agendaitems/${agendaItemId}`
 }
