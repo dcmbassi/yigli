@@ -55,7 +55,7 @@ const AddMeetingForm = ({members}) => {
 
     const handleMultiChange = e => {
         const {name, value} = e.target
-        const trueValue = typeof value === 'string' ? value.split('') : value
+        const trueValue = typeof value === 'string' ? value.split(',') : value
         dispatch({type: ACTIONS.CHANGE_ARRAY, payload: {name, trueValue}})
     }
 
