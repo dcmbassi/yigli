@@ -16,6 +16,9 @@ import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import { formReducer } from '../../src/reducers/formReducer'
+import { ACTIONS } from '../../src/constants/reducerActions'
+import { submitPutForm } from '../../src/utils/formSubmission'
+import { ENDPOINTS } from '../../src/constants/endpoints'
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -28,7 +31,15 @@ const MenuProps = {
     },
 }
 
-const EditMeetingForm = ({meeting}) => {
+/*
+    TO DO:
+    1. Import member list prop
+    2. Handle display of member list
+    3. Test functionality
+    4. Handle form submission
+*/
+
+const EditMeetingForm = ({ meeting }) => {
     const [state, dispatch] = useReducer(formReducer, meeting)
     const [success, setSuccess] = useState(false)
     const [successMessage, setSuccessMessage] = useState('')
@@ -47,14 +58,34 @@ const EditMeetingForm = ({meeting}) => {
     useEffect(() => {
         let delayedRedirection = setTimeout(() => {
             if (complete) router.push(`/meetings/${meeting._id}`)
-        }, 2100)        
+        }, 2100)
         return () => clearTimeout(delayedRedirection)
     }, [complete, router, meeting._id])
 
+    const handleInputChange = e => {
+        const { name } = e.target
+        const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
+        dispatch({ type: ACTIONS.CHANGE_INPUT, payload: { name, value } })
+    }
+
+    const handleMultiChange = e => {
+        const { name, value } = e.target
+        const trueValue = typeof value === 'string' ? value.split(',') : value
+        dispatch({ type: ACTIONS.CHANGE_ARRAY, payload: { name, value } })
+    }
 
 
     const handleSubmit = async e => {
         e.preventDefault()
+        try {
+            const result = await submitPutForm(ENDPOINTS.editMeeting(meeting._id), state)
+            if (result.success) {
+                setSuccess(true)
+                setComplete(true)
+            }
+        } catch (error) {
+            console.log(error.message)
+        }
 
     }
     return (
@@ -70,6 +101,8 @@ const EditMeetingForm = ({meeting}) => {
                                 type='date'
                                 name='date'
                                 label='Date'
+                                value={state.date}
+                                onChange={handleInputChange}
                                 size='small'
                                 InputLabelProps={{ shrink: true }}
                                 fullWidth
@@ -78,6 +111,8 @@ const EditMeetingForm = ({meeting}) => {
                                 type='text'
                                 name='location'
                                 label='Lieu'
+                                value={state.location}
+                                onChange={handleInputChange}
                                 size='small'
                                 InputLabelProps={{ shrink: true }}
                                 fullWidth
@@ -91,7 +126,9 @@ const EditMeetingForm = ({meeting}) => {
                                     id='hosts'
                                     label='Hôtes'
                                     name='hosts'
-                                    // multiple
+                                    multiple
+                                    value={state.hosts || ''}
+                                    onChange={handleMultiChange}
                                     input={<OutlinedInput label='Hôtes' />}
                                     MenuProps={MenuProps}
                                 >
@@ -107,7 +144,11 @@ const EditMeetingForm = ({meeting}) => {
                             <FormControl>
                                 <FormControlLabel
                                     control={
-                                        <Checkbox name='upcoming' />
+                                        <Checkbox
+                                            name='upcoming'
+                                            value={state.upcoming}
+                                            onChange={handleInputChange}
+                                        />
                                     }
                                     label='A venir'
                                 />
