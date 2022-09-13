@@ -10,7 +10,7 @@ import { extractDate } from '../src/utils/helpers'
 import MinuteList from './MinuteList'
 import MinuteItemDialog from './MinuteItemDialog'
 
-const MeetingDetails = ({meeting}) => {
+const MeetingDetails = ({meeting, members}) => {
     const [open, setOpen] = useState(false)
 
     const handleOpen = () => setOpen(true)
@@ -63,7 +63,7 @@ const MeetingDetails = ({meeting}) => {
                 </Box>
             </Stack>
         </Stack>
-        <MinuteItemDialog open={open} handleClose={handleClose} />
+        <MinuteItemDialog open={open} handleClose={handleClose} meetingId={meeting._id} members={members} />
     </Box>
   )
 }
