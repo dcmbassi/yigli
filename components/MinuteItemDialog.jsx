@@ -14,7 +14,7 @@ import Select from '@mui/material/Select'
 import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 
-import {formReducer} from '../src/reducers/formReducer'
+import { formReducer } from '../src/reducers/formReducer'
 import { ACTIONS } from '../src/constants/reducerActions'
 import submitForm from '../src/utils/formSubmission'
 import { ENDPOINTS } from '../src/constants/endpoints'
@@ -34,7 +34,7 @@ const initialState = {
     meeting: '',
     owner: '',
     title: '',
-    details: '',
+    description: '',
     resolution: ''
 }
 
@@ -42,26 +42,29 @@ const MinuteItemDialog = ({ open, handleClose, meetingId, members }) => {
     const [state, dispatch] = useReducer(formReducer, initialState)
 
     useEffect(() => {
+        const addMeetingId = () => {
+            const name = 'meeting'
+            const value = meetingId
+            dispatch({ type: ACTIONS.CHANGE_INPUT, payload: { name, value } })
+        }
         addMeetingId()
-    })
+    }, [meetingId])
 
     const handleInputChange = e => {
-        const {name, value} = e.target
-        dispatch({type: ACTIONS.CHANGE_INPUT, payload: {name, value}})
-    }
-
-    const addMeetingId = () => {
-        const name = 'meeting'
-        const value = meetingId
-        dispatch({type: ACTIONS.CHANGE_INPUT, payload: {name, value}})
+        const { name, value } = e.target
+        dispatch({ type: ACTIONS.CHANGE_INPUT, payload: { name, value } })
     }
 
     const saveIsDisabled = !(state.owner && state.title)
 
-    const saveAgendaItem = async () => {
+    const handleSubmit = async e => {
+        e.preventDefault()
         try {
             const result = await submitForm(ENDPOINTS.addAgendaItem, state)
-            if (result.success) handleClose()
+            if (result.success) {
+                dispatch({type: ACTIONS.RESET, payload: initialState})
+                handleClose()
+            }
         } catch (error) {
             console.log(error.message)
         }
@@ -72,7 +75,7 @@ const MinuteItemDialog = ({ open, handleClose, meetingId, members }) => {
             <DialogTitle>Ajouter Objet</DialogTitle>
             <DialogContent>
                 <DialogContentText>Hello World</DialogContentText>
-                <Stack spacing={2}>
+                <Stack spacing={2} component='form' onSubmit={handleSubmit}>
                     <FormControl size='small'>
                         <InputLabel id='owner-label'>
                             Rapporteur
@@ -101,12 +104,13 @@ const MinuteItemDialog = ({ open, handleClose, meetingId, members }) => {
                         size='small'
                     />
                     <TextField
-                        name='details'
-                        label='Détails'
-                        value={state.details}
+                        name='description'
+                        label='Description'
+                        value={state.description}
                         onChange={handleInputChange}
                         size='small'
                         multiline
+                        rows={2}
                         maxRows={4}
                     />
                     <TextField
@@ -116,27 +120,29 @@ const MinuteItemDialog = ({ open, handleClose, meetingId, members }) => {
                         onChange={handleInputChange}
                         size='small'
                         multiline
+                        rows={2}
                         maxRows={4}
                     />
+                    <DialogActions>
+                        <Button
+                            onClick={handleClose}
+                            variant='outlined'
+                            size='small'
+                        >
+                            Annuler
+                        </Button>
+                        <Button
+                            variant='contained'
+                            size='small'
+                            type='submit'
+                            // onClick={saveAgendaItem}
+                            disabled={saveIsDisabled}
+                        >
+                            Enregistrer
+                        </Button>
+                    </DialogActions>
                 </Stack>
             </DialogContent>
-            <DialogActions>
-                <Button
-                    onClick={handleClose}
-                    variant='outlined'
-                    size='small'
-                >
-                    Annuler
-                </Button>
-                <Button
-                    variant='contained'
-                    size='small'
-                    onClick={saveAgendaItem}
-                    disabled={saveIsDisabled}
-                >
-                    Enregistrer
-                </Button>
-            </DialogActions>
         </Dialog>
     )
 }
