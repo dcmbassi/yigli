@@ -10,7 +10,7 @@ import { extractDate } from '../src/utils/helpers'
 import MinuteList from './MinuteList'
 import MinuteItemDialog from './MinuteItemDialog'
 
-const MeetingDetails = ({meeting, members}) => {
+const MeetingDetails = ({meeting, members, agendaItems}) => {
     const [open, setOpen] = useState(false)
 
     const handleOpen = () => setOpen(true)
@@ -58,7 +58,7 @@ const MeetingDetails = ({meeting, members}) => {
                         >
                             Ajouter Objet
                         </Button>
-                        <MinuteList />
+                        <MinuteList items={agendaItems}/>
                     </Box>
                 </Box>
             </Stack>
