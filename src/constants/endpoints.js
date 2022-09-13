@@ -5,12 +5,12 @@ export const ENDPOINTS = {
     addMeeting: '/api/meetings',
     editMeeting: (meetingId) => `/api/meetings/${meetingId}`,
 
-    addContribution: 'api/contributions',
+    addContribution: '/api/contributions',
     editContribution: (contributionId) => `/api/contributions/${contributionId}`,
 
-    addGeneration: 'api/generations',
+    addGeneration: '/api/generations',
     editGeneration: (generationId) => `/api/generations/${generationId}`,
 
-    addAgendaItem: 'api/agendaitems',
+    addAgendaItem: '/api/agendaitems',
     editAgendaItem: (agendaItemId) => `/api/agendaitems/${agendaItemId}`
 }
