@@ -19,6 +19,7 @@ import { formReducer } from '../../src/reducers/formReducer'
 import { ACTIONS } from '../../src/constants/reducerActions'
 import { submitPutForm } from '../../src/utils/formSubmission'
 import { ENDPOINTS } from '../../src/constants/endpoints'
+import { prefillDate } from '../../src/utils/helpers'
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -39,7 +40,7 @@ const MenuProps = {
     4. Handle form submission
 */
 
-const EditMeetingForm = ({ meeting }) => {
+const EditMeetingForm = ({ meeting, members }) => {
     const [state, dispatch] = useReducer(formReducer, meeting)
     const [success, setSuccess] = useState(false)
     const [successMessage, setSuccessMessage] = useState('')
@@ -71,7 +72,7 @@ const EditMeetingForm = ({ meeting }) => {
     const handleMultiChange = e => {
         const { name, value } = e.target
         const trueValue = typeof value === 'string' ? value.split(',') : value
-        dispatch({ type: ACTIONS.CHANGE_ARRAY, payload: { name, value } })
+        dispatch({ type: ACTIONS.CHANGE_ARRAY, payload: { name, trueValue } })
     }
 
 
@@ -94,68 +95,65 @@ const EditMeetingForm = ({ meeting }) => {
                 <Typography variant='h4' textAlign='center' gutterBottom>
                     Modifier Réunion
                 </Typography>
-                <Grid container>
-                    <Grid item>
-                        <Stack direction='column' spacing={3}>
-                            <TextField
-                                type='date'
-                                name='date'
-                                label='Date'
-                                value={state.date}
-                                onChange={handleInputChange}
-                                size='small'
-                                InputLabelProps={{ shrink: true }}
-                                fullWidth
-                            />
-                            <TextField
-                                type='text'
-                                name='location'
-                                label='Lieu'
-                                value={state.location}
-                                onChange={handleInputChange}
-                                size='small'
-                                InputLabelProps={{ shrink: true }}
-                                fullWidth
-                            />
-                            <FormControl>
-                                <InputLabel id='hosts-label'>
-                                    Hôtes
-                                </InputLabel>
-                                <Select
-                                    labelId='hosts-label'
-                                    id='hosts'
-                                    label='Hôtes'
-                                    name='hosts'
-                                    multiple
-                                    value={state.hosts || ''}
-                                    onChange={handleMultiChange}
-                                    input={<OutlinedInput label='Hôtes' />}
-                                    MenuProps={MenuProps}
-                                >
-                                    <MenuItem>Dave</MenuItem>
-                                    <MenuItem>Wally</MenuItem>
-                                    <MenuItem>Azra</MenuItem>
-                                </Select>
-                            </FormControl>
-                        </Stack>
-                    </Grid>
-                    <Grid item>
-                        <Stack direction='column' spacing={3}>
-                            <FormControl>
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            name='upcoming'
-                                            value={state.upcoming}
-                                            onChange={handleInputChange}
-                                        />
-                                    }
-                                    label='A venir'
+
+                <Stack direction='column' spacing={3}>
+                    <TextField
+                        type='date'
+                        name='date'
+                        label='Date'
+                        value={prefillDate(state.date) || ''}
+                        onChange={handleInputChange}
+                        size='small'
+                        InputLabelProps={{ shrink: true }}
+                        fullWidth
+                    />
+                    <TextField
+                        type='text'
+                        name='location'
+                        label='Lieu'
+                        value={state.location}
+                        onChange={handleInputChange}
+                        size='small'
+                        InputLabelProps={{ shrink: true }}
+                        fullWidth
+                    />
+                    <FormControl size='small'>
+                        <InputLabel id='hosts-label'>
+                            Hôtes
+                        </InputLabel>
+                        <Select
+                            labelId='hosts-label'
+                            id='hosts'
+                            label='Hôtes'
+                            name='hosts'
+                            multiple
+                            value={state.hosts || ''}
+                            onChange={handleMultiChange}
+                            input={<OutlinedInput label='Hôtes' />}
+                            MenuProps={MenuProps}
+                        >
+                            {members.map(m => (
+                                <MenuItem key={m._id} value={m._id}>
+                                {`${m.firstName} ${m.lastName}`}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+                    <FormControl>
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    name='upcoming'
+                                    // value={state.upcoming || false}
+                                    checked={state.upcoming}
+                                    onChange={handleInputChange}
                                 />
-                            </FormControl>
-                        </Stack>
-                    </Grid>
-                </Grid>
+                            }
+                            label='A venir'
+                        />
+                    </FormControl>
+                </Stack>
+
                 <Box maxWidth={400} mx='auto' mt={{ xs: 2, md: 8 }}>
                     <Button variant='contained' type='submit' fullwidth='true'>
                         Enregistrer Changements
