@@ -41,17 +41,14 @@ const initialState = {
 const MinuteItemDialog = ({ open, handleClose, meetingId, members }) => {
     const [state, dispatch] = useReducer(formReducer, initialState)
 
-    useEffect(() => {
-        const addMeetingId = () => {
-            const name = 'meeting'
-            const value = meetingId
-            dispatch({ type: ACTIONS.CHANGE_INPUT, payload: { name, value } })
-        }
-        addMeetingId()
-    }, [meetingId])
-
     const handleInputChange = e => {
         const { name, value } = e.target
+        dispatch({ type: ACTIONS.CHANGE_INPUT, payload: { name, value } })
+    }
+
+    const addMeetingId = () => {
+        const name = 'meeting'
+        const value = meetingId
         dispatch({ type: ACTIONS.CHANGE_INPUT, payload: { name, value } })
     }
 
@@ -59,6 +56,7 @@ const MinuteItemDialog = ({ open, handleClose, meetingId, members }) => {
 
     const handleSubmit = async e => {
         e.preventDefault()
+        if (state.meeting === '') addMeetingId()
         try {
             const result = await submitForm(ENDPOINTS.addAgendaItem, state)
             if (result.success) {
