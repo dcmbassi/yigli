@@ -1,7 +1,14 @@
+import Stack from '@mui/material/Stack'
 
-const MinuteList = ({minutes}) => {
+import MinuteListItem from './MinuteListItem'
+
+const MinuteList = ({items}) => {
   return (
-    <div>MinuteList</div>
+    <Stack spacing={2}>
+        {items.map(item => (
+            <MinuteListItem key={item._id} item={item} />
+        ))}
+    </Stack>
   )
 }
 
