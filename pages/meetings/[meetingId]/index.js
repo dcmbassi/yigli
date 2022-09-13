@@ -8,9 +8,10 @@ import EditIcon from '@mui/icons-material/Edit'
 import dbConnect from '../../../db/connect'
 import Meeting from '../../../models/meetingModel'
 import Member from '../../../models/memberModel'
+import AgendaItem from '../../../models/agendaItemModel'
 import MeetingDetails from '../../../components/MeetingDetails';
 
-const MeetingDetailsPage = ({ meeting, members }) => {
+const MeetingDetailsPage = ({ meeting, members, agendaItems }) => {
     const editUrl = `/meetings/${meeting._id}/edit`
     return (
         <Container>
@@ -25,7 +26,7 @@ const MeetingDetailsPage = ({ meeting, members }) => {
                     </Button>
                 </Link>
             </Box>
-            <MeetingDetails meeting={meeting} members={members} />
+            <MeetingDetails meeting={meeting} members={members} agendaItems={agendaItems} />
         </Container>
     )
 }
@@ -36,9 +37,10 @@ export const getServerSideProps = async (context) => {
     const { meetingId } = context.params
 
     await dbConnect()
-    const [meeting, members] = await Promise.all([
+    const [meeting, members, agendaItems] = await Promise.all([
         Meeting.findById(meetingId).populate('hosts').lean(),
-        Member.find().select({password: 0}).lean()
+        Member.find().select({password: 0}).lean(),
+        AgendaItem.find({meeting: meetingId}).lean()
     ])
 
     // const meeting = await Meeting.findById(meetingId).populate('hosts').lean()
@@ -47,6 +49,7 @@ export const getServerSideProps = async (context) => {
         props: {
             meeting: JSON.parse(JSON.stringify(meeting)),
             members: JSON.parse(JSON.stringify(members)),
+            agendaItems: JSON.parse(JSON.stringify(agendaItems)),
         }
     }
 }
