@@ -1,6 +1,14 @@
+import { useState } from 'react'
+
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogContentText from '@mui/material/DialogContentText'
+import DialogTitle from '@mui/material/DialogTitle'
 import Stack from '@mui/material/Stack'
+import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd'
 
@@ -8,7 +16,13 @@ import { extractDate } from '../src/utils/helpers'
 import MinuteList from './MinuteList'
 
 const MeetingDetails = ({meeting}) => {
-  return (
+    const [open, setOpen] = useState(false)
+
+    const handleOpen = () => setOpen(true)
+
+    const handleClose = () => setOpen(false)
+
+    return (
     <Box p={2} sx={{width: '100%'}}>
         <Stack>
             <Stack>
@@ -41,18 +55,32 @@ const MeetingDetails = ({meeting}) => {
                         Procès-verbal
                     </Typography>
                     <Box>
-                        <MinuteList />
                         <Button
                             variant='outlined'
+                            onClick={handleOpen}
                             size='small'
                             startIcon={<PlaylistAddIcon />}
                         >
                             Ajouter Objet
                         </Button>
+                        <MinuteList />
                     </Box>
                 </Box>
             </Stack>
         </Stack>
+        <Dialog open={open} onClose={handleClose}>
+            <DialogTitle>Ajouter Objet</DialogTitle>
+            <DialogContent>
+                <DialogContentText>Hello World</DialogContentText>
+                <Box>
+                    <TextField name='test' label='Test' size='small' />
+                </Box>
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={handleClose} variant='outlined' size='small'>Annuler</Button>
+                <Button variant='contained' size='small'>Enregistrer</Button>
+            </DialogActions>
+        </Dialog>
     </Box>
   )
 }
