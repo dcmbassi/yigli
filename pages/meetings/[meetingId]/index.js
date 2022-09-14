@@ -40,7 +40,7 @@ export const getServerSideProps = async (context) => {
     const [meeting, members, agendaItems] = await Promise.all([
         Meeting.findById(meetingId).populate('hosts').lean(),
         Member.find().select({password: 0}).lean(),
-        AgendaItem.find({meeting: meetingId}).lean()
+        AgendaItem.find({meeting: meetingId}).populate('owner', 'firstName lastName').lean()
     ])
 
     // const meeting = await Meeting.findById(meetingId).populate('hosts').lean()
