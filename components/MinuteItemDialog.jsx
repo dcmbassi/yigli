@@ -9,7 +9,6 @@ import FormControl from '@mui/material/FormControl'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import Select from '@mui/material/Select'
-
 import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 
@@ -41,7 +40,14 @@ const MinuteItemDialog = ({ open, handleClose, meetingId, members }) => {
         dispatch({ type: ACTIONS.CHANGE_INPUT, payload: { name, value } })
     }
 
+    const resetFields = () => dispatch({type: ACTIONS.RESET, payload: initialState})
+
     const saveIsDisabled = !(state.owner && state.title)
+
+    const handleCancel = () => {
+        resetFields()
+        handleClose()
+    }
 
     const handleSubmit = async e => {
         e.preventDefault()
@@ -49,7 +55,7 @@ const MinuteItemDialog = ({ open, handleClose, meetingId, members }) => {
         try {
             const result = await submitForm(ENDPOINTS.addAgendaItem, state)
             if (result.success) {
-                dispatch({type: ACTIONS.RESET, payload: initialState})
+                resetFields()
                 handleClose()
             }
         } catch (error) {
@@ -111,18 +117,13 @@ const MinuteItemDialog = ({ open, handleClose, meetingId, members }) => {
                         maxRows={4}
                     />
                     <DialogActions>
-                        <Button
-                            onClick={handleClose}
-                            variant='outlined'
-                            size='small'
-                        >
+                        <Button onClick={handleCancel} variant='outlined' size='small'>
                             Annuler
                         </Button>
                         <Button
                             variant='contained'
                             size='small'
                             type='submit'
-                            // onClick={saveAgendaItem}
                             disabled={saveIsDisabled}
                         >
                             Enregistrer
