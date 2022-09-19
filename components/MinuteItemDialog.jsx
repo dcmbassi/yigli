@@ -1,10 +1,9 @@
-import { useEffect, useReducer } from 'react'
+import { useReducer } from 'react'
 
 import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
-import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
 import FormControl from '@mui/material/FormControl'
 import InputLabel from '@mui/material/InputLabel'
@@ -70,9 +69,8 @@ const MinuteItemDialog = ({ open, handleClose, meetingId, members }) => {
 
     return (
         <Dialog open={open} onClose={handleClose}>
-            <DialogTitle>Ajouter Objet</DialogTitle>
+            <DialogTitle textAlign='center'>Ajouter Objet</DialogTitle>
             <DialogContent>
-                <DialogContentText>Hello World</DialogContentText>
                 <Stack spacing={2} component='form' onSubmit={handleSubmit}>
                     <FormControl size='small'>
                         <InputLabel id='owner-label'>
