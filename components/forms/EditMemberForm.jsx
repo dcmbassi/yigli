@@ -82,7 +82,7 @@ const EditMemberForm = ({ member, spouseList, parentList, childrenList, generati
                     mb={4}
                 >
                     <Grid item xs={12} md={6}>
-                        <Stack direction='column' spacing={3}>
+                        <Stack direction='column' spacing={3} maxWidth='270px'>
                             <TextField
                                 type='text'
                                 name='firstName'
@@ -126,7 +126,7 @@ const EditMemberForm = ({ member, spouseList, parentList, childrenList, generati
                         </Stack>
                     </Grid>
                     <Grid item xs={12} md={6}>
-                        <Stack direction='column' spacing={3}>
+                        <Stack direction='column' spacing={3} maxWidth='270px'>
                             <FormControl size='small'>
                                 <InputLabel id='generation-label' >
                                     Génération
@@ -193,7 +193,7 @@ const EditMemberForm = ({ member, spouseList, parentList, childrenList, generati
                                     ))}
                                 </Select>
                             </FormControl>
-                            <FormControl size='small'>
+                            <FormControl size='small' >
                                 <InputLabel id='children-label' >
                                     Enfants
                                 </InputLabel>
