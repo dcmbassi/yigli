@@ -5,6 +5,7 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
+import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
@@ -36,11 +37,11 @@ const AddGenerationForm = () => {
     const handleInputChange = e => {
         const name = e.target.name
         const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
-        dispatch({type: 'CHANGE_INPUT', payload: {name, value}})
+        dispatch({ type: 'CHANGE_INPUT', payload: { name, value } })
     }
 
     const resetFields = () => {
-        dispatch({type: 'RESET', payload: initialState})
+        dispatch({ type: 'RESET', payload: initialState })
     }
 
     const submitIsDisabled = !(state.index && state.label && state.contributionAmount)
@@ -70,8 +71,7 @@ const AddGenerationForm = () => {
                 <Typography variant='h4' sx={{ textAlign: 'center' }} gutterBottom>
                     Nouvelle Génération
                 </Typography>
-
-                <Box my={2}>
+                <Stack direction='column' spacing={3}>
                     <TextField
                         type='number'
                         name='index'
@@ -81,9 +81,6 @@ const AddGenerationForm = () => {
                         size='small'
                         fullWidth
                     />
-                </Box>
-
-                <Box my={2}>
                     <TextField
                         type='text'
                         name='label'
@@ -93,9 +90,6 @@ const AddGenerationForm = () => {
                         size='small'
                         fullWidth
                     />
-                </Box>
-
-                <Box my={2}>
                     <TextField
                         type='number'
                         name='contributionAmount'
@@ -105,12 +99,9 @@ const AddGenerationForm = () => {
                         size='small'
                         fullWidth
                     />
-                </Box>
-
-                <Box my={2}>
                     <FormControlLabel
                         control={
-                            <Checkbox  
+                            <Checkbox
                                 name='dependent'
                                 value={state.dependent}
                                 onChange={handleInputChange}
@@ -118,16 +109,17 @@ const AddGenerationForm = () => {
                         }
                         label="A charge"
                     />
-                </Box>
+                    <Button
+                        variant='contained'
+                        type='submit'
+                        disabled={submitIsDisabled}
+                        fullWidth
+                    >
+                        Enregistrer
+                    </Button>
 
-                <Button
-                    variant='contained'
-                    type='submit'
-                    disabled={submitIsDisabled}
-                    fullWidth
-                >
-                    Enregistrer
-                </Button>
+                </Stack>
+
             </Box>
             {success && <Alert severity='success'>{successMessage}</Alert>}
         </Box>

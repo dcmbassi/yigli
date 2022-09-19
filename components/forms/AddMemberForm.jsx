@@ -8,6 +8,7 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import FormLabel from '@mui/material/FormLabel'
 import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
+import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 
@@ -73,8 +74,7 @@ const AddMemberForm = () => {
                 <Typography variant='h4' sx={{ textAlign: 'center' }} gutterBottom>
                     Nouveau Membre
                 </Typography>
-
-                <Box my={2}>
+                <Stack direction='column' spacing={3}>
                     <TextField
                         type='text'
                         name='firstName'
@@ -84,9 +84,6 @@ const AddMemberForm = () => {
                         size='small'
                         fullWidth
                     />
-                </Box>
-
-                <Box my={2}>
                     <TextField
                         type='text'
                         name='lastName'
@@ -96,9 +93,6 @@ const AddMemberForm = () => {
                         size='small'
                         fullWidth
                     />
-                </Box>
-
-                <Box my={2}>
                     <TextField
                         type='email'
                         name='email'
@@ -108,9 +102,6 @@ const AddMemberForm = () => {
                         size='small'
                         fullWidth
                     />
-                </Box>
-
-                <Box my={2}>
                     <TextField
                         type='password'
                         name='password'
@@ -120,9 +111,6 @@ const AddMemberForm = () => {
                         size='small'
                         fullWidth
                     />
-                </Box>
-
-                <Box my={2}>
                     <TextField
                         type='text'
                         name='address'
@@ -132,9 +120,6 @@ const AddMemberForm = () => {
                         size='small'
                         fullWidth
                     />
-                </Box>
-
-                <Box my={2}>
                     <FormControl>
                         <FormLabel id='sex'>Sexe</FormLabel>
                         <RadioGroup aria-labelledby='sex' name='sex'>
@@ -148,16 +133,16 @@ const AddMemberForm = () => {
                             ))}
                         </RadioGroup>
                     </FormControl>
-                </Box>
 
-                <Button
-                    variant='contained'
-                    type='submit'
-                    disabled={submitIsDisabled}
-                    fullWidth
-                >
-                    Enregistrer
-                </Button>
+                    <Button
+                        variant='contained'
+                        type='submit'
+                        disabled={submitIsDisabled}
+                        fullWidth
+                    >
+                        Enregistrer
+                    </Button>
+                </Stack>
             </Box>
             {success && <Alert severity='success'>{successMessage}</Alert>}
         </Box>
