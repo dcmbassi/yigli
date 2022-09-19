@@ -17,22 +17,7 @@ import Typography from '@mui/material/Typography'
 import { editFormReducer } from '../../src/reducers/editFormReducer'
 import { submitPutForm } from '../../src/utils/formSubmission'
 import { ENDPOINTS } from '../../src/constants/endpoints'
-
-/*
-    TO DO
-    4. Validate inputs
-    6. Correct display when the content of the inputs gets too long
-*/
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-    PaperProps: {
-        style: {
-            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            width: 250,
-        },
-    },
-}
+import { MenuProps } from '../../src/constants/menuProps'
 
 const EditMemberForm = ({ member, spouseList, parentList, childrenList, generations }) => {
     const [state, dispatch] = useReducer(editFormReducer, member)

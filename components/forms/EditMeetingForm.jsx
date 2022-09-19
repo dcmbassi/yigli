@@ -20,17 +20,7 @@ import { ACTIONS } from '../../src/constants/reducerActions'
 import { submitPutForm } from '../../src/utils/formSubmission'
 import { ENDPOINTS } from '../../src/constants/endpoints'
 import { prefillDate } from '../../src/utils/helpers'
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-    PaperProps: {
-        style: {
-            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            width: 250,
-        },
-    },
-}
+import { MenuProps } from '../../src/constants/menuProps'
 
 /*
     TO DO:
