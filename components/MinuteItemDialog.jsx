@@ -61,6 +61,7 @@ const MinuteItemDialog = ({ open, handleClose, meetingId, members }) => {
         <Dialog open={open} onClose={handleClose}>
             <DialogTitle textAlign='center'>Ajouter Objet</DialogTitle>
             <DialogContent>
+                &nbsp;
                 <Stack spacing={2} component='form' onSubmit={handleSubmit}>
                     <FormControl size='small'>
                         <InputLabel id='owner-label'>
