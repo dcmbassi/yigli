@@ -9,13 +9,17 @@ import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd'
 import { extractDate } from '../src/utils/helpers'
 import MinuteList from './MinuteList'
 import MinuteItemDialog from './MinuteItemDialog'
+import ContributionDialog from './ContributionDialog'
 
 const MeetingDetails = ({ meeting, members, agendaItems }) => {
-    const [open, setOpen] = useState(false)
+    const [minutesOpen, setMinutesOpen] = useState(false)
+    const [contributionsOpen, setContributionsOpen] = useState(false)
 
-    const handleOpen = () => setOpen(true)
+    const handleMinutesOpen = () => setMinutesOpen(true)
+    const handleMinutesClose = () => setMinutesOpen(false)
 
-    const handleClose = () => setOpen(false)
+    const handleContributionsOpen = () => setContributionsOpen(true)
+    const handleContributionsClose = () => setContributionsOpen(false)
 
     return (
         <Box p={2} sx={{ width: '100%' }}>
@@ -46,6 +50,18 @@ const MeetingDetails = ({ meeting, members, agendaItems }) => {
                         </Typography>
                     </Box>
                     <Box>
+                        <Typography variant='body2'>
+                            Contributions:
+                        </Typography>
+                        <Button
+                            variant='outlined'
+                            size='small'
+                            onClick={handleContributionsOpen}
+                        >
+                            Ajouter contribution
+                        </Button>
+                    </Box>
+                    <Box>
                         <Typography variant='h6' textAlign='center'>
                             Procès-verbal
                         </Typography>
@@ -53,7 +69,7 @@ const MeetingDetails = ({ meeting, members, agendaItems }) => {
                             <Box display='flex' justifyContent='flex-end'>
                                 <Button
                                     variant='outlined'
-                                    onClick={handleOpen}
+                                    onClick={handleMinutesOpen}
                                     size='small'
                                     startIcon={<PlaylistAddIcon />}
                                 >
@@ -66,7 +82,18 @@ const MeetingDetails = ({ meeting, members, agendaItems }) => {
                     </Box>
                 </Stack>
             </Stack>
-            <MinuteItemDialog open={open} handleClose={handleClose} meetingId={meeting._id} members={members} />
+            <MinuteItemDialog
+                open={minutesOpen}
+                handleClose={handleMinutesClose}
+                meetingId={meeting._id}
+                members={members}
+            />
+            <ContributionDialog 
+                open={contributionsOpen}
+                handleClose={handleContributionsClose}
+                meetingId={meeting._id}
+                members={members}
+            />
         </Box>
     )
 }
