@@ -23,7 +23,7 @@ export default MeetingsPage
 export const getServerSideProps = async () => {
     await dbConnect()
 
-    const meetings = await Meeting.find().lean()
+    const meetings = await Meeting.find().sort('-date').lean()
 
     return {
         props: {

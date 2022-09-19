@@ -32,7 +32,7 @@ export default function Home({ meetings, totalContributions}) {
 export const getServerSideProps = async () => {
     await dbConnect()
 
-    const meetingResult = await Meeting.find()
+    const meetingResult = await Meeting.find().sort('-date')
     const totalContributions = await Contribution.aggregate([
         { $match: { amount: { $gte: 0 } } },
         { $group: { _id: null, totalAmount: { $sum: '$amount' } } }
