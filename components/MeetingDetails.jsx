@@ -6,12 +6,12 @@ import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd'
 
-import { extractDate } from '../src/utils/helpers'
+import { extractDate, formatCurrency } from '../src/utils/helpers'
 import MinuteList from './MinuteList'
 import MinuteItemDialog from './MinuteItemDialog'
 import ContributionDialog from './ContributionDialog'
 
-const MeetingDetails = ({ meeting, members, agendaItems }) => {
+const MeetingDetails = ({ meeting, members, agendaItems, totalContributions }) => {
     const [minutesOpen, setMinutesOpen] = useState(false)
     const [contributionsOpen, setContributionsOpen] = useState(false)
 
@@ -20,6 +20,8 @@ const MeetingDetails = ({ meeting, members, agendaItems }) => {
 
     const handleContributionsOpen = () => setContributionsOpen(true)
     const handleContributionsClose = () => setContributionsOpen(false)
+
+    const total = formatCurrency(totalContributions)
 
     return (
         <Box p={2} sx={{ width: '100%' }}>
@@ -50,8 +52,8 @@ const MeetingDetails = ({ meeting, members, agendaItems }) => {
                         </Typography>
                     </Box>
                     <Box>
-                        <Typography variant='body2'>
-                            Contributions:
+                        <Typography variant='body2' gutterBottom>
+                            Contributions: {total}
                         </Typography>
                         <Button
                             variant='outlined'
