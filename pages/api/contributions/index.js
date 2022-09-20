@@ -21,7 +21,7 @@ const handler = async (req, res) => {
                 const contribution = await Contribution.create(contributionData)
                 res.status(201).json({ success: true, data: contribution })
             } catch (error) {
-                res.status(400).json({ success: false, message: error.response.data })
+                res.status(400).json({ success: false, message: error.message })
             }
             break;
 
