@@ -21,33 +21,44 @@ import { ACTIONS } from '../src/constants/reducerActions'
 const initialState = {
     meeting: '',
     contributor: '',
-    amount: ''
+    amount: '',
+    date: ''
 }
 
-const ContributionDialog = ({ open, handleClose, meetingId, members }) => {
+const ContributionDialog = ({ open, handleClose, meetingId, date, members }) => {
     const [state, dispatch] = useReducer(formReducer, initialState)
+
+    const addStateField = (fieldName, fieldValue) => {
+        const name = fieldName
+        const value = fieldValue
+        dispatch({ type: ACTIONS.CHANGE_INPUT, payload: { name, value } })
+    }
 
     const handleInputChange = e => {
         const { name, value } = e.target
         dispatch({ type: ACTIONS.CHANGE_INPUT, payload: { name, value } })
     }
 
-    const addMeetingId = () => {
-        const name = 'meeting'
-        const value = meetingId
-        dispatch({ type: ACTIONS.CHANGE_INPUT, payload: { name, value } })
-    }
-
-    const resetFields = () => dispatch({type: ACTIONS.RESET, payload: initialState})
+    const resetFields = () => dispatch({ type: ACTIONS.RESET, payload: initialState })
 
     const handleCancel = () => {
         resetFields()
         handleClose()
     }
 
+    !!!state.meeting && addStateField('meeting', meetingId)
+    !!!state.date && addStateField('date', date)
+
+    const submitIsDisabled = !(
+        state.meeting
+        && state.contributor
+        && state.amount
+        && state.date
+    )
+
     const handleSubmit = async e => {
         e.preventDefault()
-        if (state.meeting === '') addMeetingId()
+
         try {
             const result = await submitForm(ENDPOINTS.addContribution, state)
             if (result.success) resetFields()
@@ -94,7 +105,7 @@ const ContributionDialog = ({ open, handleClose, meetingId, members }) => {
                         <Button onClick={handleCancel} variant='outlined' size='small'>
                             Annuler
                         </Button>
-                        <Button variant='contained' size='small' type='submit'>
+                        <Button variant='contained' size='small' type='submit' disabled={submitIsDisabled}>
                             Enregistrer
                         </Button>
                     </DialogActions>

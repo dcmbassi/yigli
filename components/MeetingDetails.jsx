@@ -92,6 +92,7 @@ const MeetingDetails = ({ meeting, members, agendaItems }) => {
                 open={contributionsOpen}
                 handleClose={handleContributionsClose}
                 meetingId={meeting._id}
+                date={meeting.date}
                 members={members}
             />
         </Box>
