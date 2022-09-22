@@ -7,7 +7,7 @@ import MemberImage from './MemberImage'
 import MemberNameCell from './MemberNameCell'
 import MemberSublist from './MemberSublist'
 
-const MemberDetails = ({ member }) => {
+const MemberDetails = ({ member, totalContribution }) => {
     return (
         <Box p={2} sx={{ width: '100%' }}>
             <Grid container p={2} my={2} spacing={{ xs: 2, md: 3 }} >
@@ -25,13 +25,17 @@ const MemberDetails = ({ member }) => {
                             memberName={`${member.firstName} ${member.lastName}`}
                             memberAddress={member.address}
                         />
-                        <MemberContributionCell />
+                        <MemberContributionCell contribution={totalContribution} />
                     </Stack>
                 </Grid>
                 <Grid item xs={12} sm={4} md={3} >
                     <Box sx={{ height: '100%' }}>
-                        {!!member.parents.length && <MemberSublist members={member.parents} title='Parents' />}
-                        {!!member.children.length && <MemberSublist members={member.children} title='Enfants' />}
+                        {!!member.parents.length && (
+                            <MemberSublist members={member.parents} title='Parents' />
+                        )}
+                        {!!member.children.length && (
+                            <MemberSublist members={member.children} title='Enfants' />
+                        )}
                     </Box>
                 </Grid>
                 <Grid item xs={12} sm={8} md={9} >
