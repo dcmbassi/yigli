@@ -5,11 +5,13 @@ import Button from "@mui/material/Button"
 import Box from "@mui/material/Box"
 import EditIcon from '@mui/icons-material/Edit'
 
+import mongoose from 'mongoose'
 import dbConnect from "../../../db/connect"
 import Member from '../../../models/memberModel'
-import MemberDetails from "../../../components/MemberDetails"
+import Contribution from '../../../models/contributionModel'
+import MemberDetails from '../../../components/MemberDetails'
 
-const MemberDetailsPage = ({ member }) => {
+const MemberDetailsPage = ({ member, totalContribution }) => {
     const editUrl = `/members/${member._id}/edit`
     return (
         <Container>
@@ -24,7 +26,10 @@ const MemberDetailsPage = ({ member }) => {
                     </Button>
                 </Link>
             </Box>
-            <MemberDetails member={member} />
+            <MemberDetails
+                member={member}
+                totalContribution={totalContribution}
+            />
         </Container>
     )
 }
@@ -36,13 +41,22 @@ export const getServerSideProps = async (context) => {
 
     await dbConnect()
 
-    const member = await Member.findById(memberId)
-        .populate('parents', 'firstName lastName')
-        .populate('children', 'firstName lastName')
-        .lean()
+    const [member, totalContribution] = await Promise.all([
+        Member.findById(memberId)
+            .populate('parents', 'firstName lastName')
+            .populate('children', 'firstName lastName')
+            .lean(),
+        Contribution.aggregate([
+            { $match: { contributor: new mongoose.Types.ObjectId(memberId) } },
+            { $group: { _id: null, totalAmount: { $sum: '$amount' } } }
+        ])
+    ])
     delete member.password
-
+    
     return {
-        props: { member: JSON.parse(JSON.stringify(member)) }
+        props: {
+            member: JSON.parse(JSON.stringify(member)),
+            totalContribution: totalContribution[0].totalAmount
+        }
     }
 }
