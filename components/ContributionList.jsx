@@ -5,7 +5,12 @@ const ContributionList = ({ contributions }) => {
     return (
         <>
             {contributions.map(c => (
-                <Typography key={c._id} variant='body2' gutterBottom>
+                <Typography
+                    key={c._id}
+                    variant='body2'
+                    textAlign={{ xs: 'center', md: 'left' }}
+                    gutterBottom
+                >
                     {`${extractDate(c.date)}: ${formatCurrency(c.amount)}`}
                 </Typography>
             ))}

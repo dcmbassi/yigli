@@ -43,7 +43,11 @@ const MemberDetails = ({ member, contributions }) => {
                 </Grid>
                 <Grid item xs={12} sm={8} md={9} >
                     <Box sx={{ height: '100%' }}>
-                        <Typography variant='h6' gutterBottom>
+                        <Typography
+                            variant='h6'
+                            textAlign={{ xs: 'center', md: 'left' }}
+                            gutterBottom
+                        >
                             Contributions
                         </Typography>
                         {!!contributions.length && (
