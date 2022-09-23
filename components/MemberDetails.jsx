@@ -1,6 +1,8 @@
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Stack from "@mui/material/Stack"
+import Typography from "@mui/material/Typography"
+import ContributionList from './ContributionList'
 
 import MemberContributionCell from './MemberContributionCell'
 import MemberImage from './MemberImage'
@@ -41,7 +43,12 @@ const MemberDetails = ({ member, contributions }) => {
                 </Grid>
                 <Grid item xs={12} sm={8} md={9} >
                     <Box sx={{ height: '100%', background: '#ddd' }}>
-                        Miscellany
+                        <Typography variant='h6' gutterBottom>
+                            Contributions
+                        </Typography>
+                        {!!contributions.length && (
+                            <ContributionList contributions={contributions} />
+                        )}
                     </Box>
                 </Grid>
             </Grid>
