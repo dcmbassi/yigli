@@ -11,7 +11,7 @@ const MeetingsPage = ({ meetings }) => {
     const past = meetings.filter(meeting => !meeting.upcoming)
     return (
         <Container>
-            <Meta />
+            <Meta title='Réunions' />
             <MeetingListing 
                 upcoming={upcoming}
                 past={past}

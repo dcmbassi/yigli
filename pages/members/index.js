@@ -9,7 +9,7 @@ import MembersGrid from '../../components/MembersGrid'
 const MembersPage = ({ members }) => {
     return (
         <Container>
-            <Meta description="Membres de l\'association Yigli Family" />
+            <Meta title='Membres' description="Membres de l\'association Yigli Family" />
             <MembersGrid members={members} />
         </Container>
     )

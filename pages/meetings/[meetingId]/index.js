@@ -19,7 +19,7 @@ const MeetingDetailsPage = ({ meeting, members, agendaItems, totalContributions 
 
     return (
         <Container>
-            <Meta />
+            <Meta title='Réunions' />
             <Box px={4} mt={2} display='flex' justifyContent='flex-end'>
                 <Link href={editUrl} passHref>
                     <Button

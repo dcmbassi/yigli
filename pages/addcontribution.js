@@ -9,7 +9,7 @@ import Meta from '../layouts/Meta'
 const addcontribution = ({members}) => {
     return (
         <Container>
-            <Meta />
+            <Meta title='Nouvelle contribution' description='Ajouter une nouvelle contribution' />
             <AddContributionForm members={members}/>
         </Container>
     )

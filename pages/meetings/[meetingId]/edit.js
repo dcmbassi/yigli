@@ -10,7 +10,7 @@ import Member from '../../../models/memberModel'
 const EditMeetingPage = ({ meeting, members }) => {
     return (
         <Container>
-            <Meta />
+            <Meta title='Modifier réunion' />
             <EditMeetingForm meeting={meeting} members={members} />
         </Container>
     )

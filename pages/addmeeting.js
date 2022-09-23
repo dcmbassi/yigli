@@ -6,9 +6,11 @@ import dbConnect from '../db/connect'
 import Meta from '../layouts/Meta'
 
 const addmeeting = ({members}) => {
+    const desc = 'Définir la date, le lieu et les hôtes de la prochaine réunion'
+    
     return (
         <Container>
-            <Meta />
+            <Meta title='Nouvelle réunion' description={desc} />
             <AddMeetingForm members={members} />
         </Container>
     )

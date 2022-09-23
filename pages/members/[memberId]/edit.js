@@ -9,7 +9,7 @@ import Meta from "../../../layouts/Meta"
 const EditMemberPage = ({ member, spouseList, parentList, childrenList, generations }) => {
     return (
         <Container>
-            <Meta />
+            <Meta title='Modifier membre' />
             <EditMemberForm
                 member={member}
                 spouseList={spouseList}

@@ -16,7 +16,7 @@ const MemberDetailsPage = ({ member, contributions }) => {
     const editUrl = `/members/${member._id}/edit`
     return (
         <Container>
-            <Meta />
+            <Meta title='Membres' />
             <Box px={4} mt={2} display='flex' justifyContent='flex-end'>
                 <Link href={editUrl} passHref>
                     <Button
