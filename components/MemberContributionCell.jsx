@@ -12,7 +12,7 @@ const MemberContributionCell = ({contribution}) => {
             sx={{ width: '100%' }}
         >
             <Typography textAlign={{ xs: 'center', md: 'left' }} >
-                Contributions: {total}
+                Total contribué: {total}
             </Typography>
         </Stack>
     )
