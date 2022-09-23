@@ -16,13 +16,7 @@ const addcontribution = ({members}) => {
 export const getServerSideProps = async () => {
     await dbConnect()
   
-    const memberResult = await Member.find()
-    
-    const members = memberResult.map(doc => {
-      const member = doc.toObject()
-      member._id = member._id.toString()
-      return member
-    })
+    const members = await Member.find().lean()
   
     return {
       props: {

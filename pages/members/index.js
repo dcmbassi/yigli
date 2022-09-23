@@ -27,8 +27,6 @@ export const getServerSideProps = async () => {
         Generation.find().lean()
     ])
 
-    // const members = await Member.find().populate('generation', 'index label contributionAmount').lean()
-
     return {
         props: { members: JSON.parse(JSON.stringify(members)) }
     }
