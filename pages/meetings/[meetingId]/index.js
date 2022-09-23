@@ -12,12 +12,14 @@ import Member from '../../../models/memberModel'
 import AgendaItem from '../../../models/agendaItemModel'
 import Contribution from '../../../models/contributionModel'
 import MeetingDetails from '../../../components/MeetingDetails'
+import Meta from '../../../layouts/Meta'
 
 const MeetingDetailsPage = ({ meeting, members, agendaItems, totalContributions }) => {
     const editUrl = `/meetings/${meeting._id}/edit`
 
     return (
         <Container>
+            <Meta />
             <Box px={4} mt={2} display='flex' justifyContent='flex-end'>
                 <Link href={editUrl} passHref>
                     <Button

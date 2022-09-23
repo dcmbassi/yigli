@@ -3,6 +3,7 @@ import Container from '@mui/material/Container'
 import Meeting from '../../models/meetingModel'
 import dbConnect from '../../db/connect'
 import MeetingListing from '../../components/MeetingListing'
+import Meta from '../../layouts/Meta'
 
 
 const MeetingsPage = ({ meetings }) => {
@@ -10,6 +11,7 @@ const MeetingsPage = ({ meetings }) => {
     const past = meetings.filter(meeting => !meeting.upcoming)
     return (
         <Container>
+            <Meta />
             <MeetingListing 
                 upcoming={upcoming}
                 past={past}

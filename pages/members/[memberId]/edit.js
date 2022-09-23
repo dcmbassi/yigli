@@ -4,10 +4,12 @@ import EditMemberForm from "../../../components/forms/EditMemberForm"
 import dbConnect from "../../../db/connect"
 import Member from '../../../models/memberModel'
 import Generation from '../../../models/generationModel'
+import Meta from "../../../layouts/Meta"
 
 const EditMemberPage = ({ member, spouseList, parentList, childrenList, generations }) => {
     return (
         <Container>
+            <Meta />
             <EditMemberForm
                 member={member}
                 spouseList={spouseList}

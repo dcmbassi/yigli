@@ -2,6 +2,7 @@ import Container from '@mui/material/Container'
 import EditMeetingForm from '../../../components/forms/EditMeetingForm'
 
 import dbConnect from '../../../db/connect'
+import Meta from '../../../layouts/Meta'
 import Meeting from '../../../models/meetingModel'
 import Member from '../../../models/memberModel'
 
@@ -9,6 +10,7 @@ import Member from '../../../models/memberModel'
 const EditMeetingPage = ({ meeting, members }) => {
     return (
         <Container>
+            <Meta />
             <EditMeetingForm meeting={meeting} members={members} />
         </Container>
     )

@@ -10,11 +10,13 @@ import dbConnect from "../../../db/connect"
 import Member from '../../../models/memberModel'
 import Contribution from '../../../models/contributionModel'
 import MemberDetails from '../../../components/MemberDetails'
+import Meta from '../../../layouts/Meta';
 
 const MemberDetailsPage = ({ member, contributions }) => {
     const editUrl = `/members/${member._id}/edit`
     return (
         <Container>
+            <Meta />
             <Box px={4} mt={2} display='flex' justifyContent='flex-end'>
                 <Link href={editUrl} passHref>
                     <Button
