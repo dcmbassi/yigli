@@ -1,3 +1,6 @@
+import Container from '@mui/material/Container'
+import Box from '@mui/material/Box'
+
 import Meta from '../layouts/Meta'
 import styles from '../styles/Home.module.css'
 import dbConnect from '../db/connect'
@@ -11,39 +14,32 @@ export default function Home({ meetings, totalContributions}) {
     const pastMeetings = meetings.filter(meeting => !meeting.upcoming)
 
     return (
-        <div className={styles.container}>
+        <Container>
             <Meta description='Descendance de Jean-Baptiste Medoung' />
 
-            <main className={styles.main}>
-                <div>
+            <Box maxWidth={'80%'} sx={{marginInline: 'auto'}}>
+                <Box>
                     <h4>Prochaines réunions</h4>
                     <MeetingsTable meetings={futureMeetings} />
-                </div>
+                </Box>
                 
-                <div>
+                <Box>
                     <h4>Réunions récentes</h4>
                     <MeetingsTable meetings={pastMeetings} />
-                </div>
-            </main>
-        </div>
+                </Box>
+            </Box>
+        </Container>
     )
 }
 
 export const getServerSideProps = async () => {
     await dbConnect()
 
-    const meetingResult = await Meeting.find().sort('-date')
+    const meetings = await Meeting.find().sort('-date').lean()
     const totalContributions = await Contribution.aggregate([
         { $match: { amount: { $gte: 0 } } },
         { $group: { _id: null, totalAmount: { $sum: '$amount' } } }
     ])
-
-    
-    const meetings = meetingResult.map(doc => {
-        const meeting = doc.toObject()
-        meeting._id = meeting._id.toString()
-        return meeting
-    })
 
     return {
         props: {
