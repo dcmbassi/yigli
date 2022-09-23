@@ -42,7 +42,7 @@ const MemberDetails = ({ member, contributions }) => {
                     </Box>
                 </Grid>
                 <Grid item xs={12} sm={8} md={9} >
-                    <Box sx={{ height: '100%', background: '#ddd' }}>
+                    <Box sx={{ height: '100%' }}>
                         <Typography variant='h6' gutterBottom>
                             Contributions
                         </Typography>
