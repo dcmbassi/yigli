@@ -56,7 +56,9 @@ export const getServerSideProps = async (context) => {
     return {
         props: {
             member: JSON.parse(JSON.stringify(member)),
-            totalContribution: totalContribution[0].totalAmount
+            totalContribution: !!totalContribution.length 
+                ? totalContribution[0].totalAmount
+                : 0
         }
     }
 }

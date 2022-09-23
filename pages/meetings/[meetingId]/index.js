@@ -60,7 +60,9 @@ export const getServerSideProps = async (context) => {
             meeting: JSON.parse(JSON.stringify(meeting)),
             members: JSON.parse(JSON.stringify(members)),
             agendaItems: JSON.parse(JSON.stringify(agendaItems)),
-            totalContributions: totalContributions[0].totalAmount
+            totalContributions: !!totalContributions.length 
+            ? totalContributions[0].totalAmount
+            : 0
         }
     }
 }
