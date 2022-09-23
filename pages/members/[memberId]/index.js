@@ -46,7 +46,7 @@ export const getServerSideProps = async (context) => {
             .populate('parents', 'firstName lastName')
             .populate('children', 'firstName lastName')
             .lean(),
-        Contribution.find({contributor: memberId}).lean(),
+        Contribution.find({contributor: memberId}).sort('-date').lean(),
     ])
     delete member.password
     
