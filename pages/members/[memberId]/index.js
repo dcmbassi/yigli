@@ -11,7 +11,7 @@ import Member from '../../../models/memberModel'
 import Contribution from '../../../models/contributionModel'
 import MemberDetails from '../../../components/MemberDetails'
 
-const MemberDetailsPage = ({ member, totalContribution }) => {
+const MemberDetailsPage = ({ member, contributions }) => {
     const editUrl = `/members/${member._id}/edit`
     return (
         <Container>
@@ -28,7 +28,7 @@ const MemberDetailsPage = ({ member, totalContribution }) => {
             </Box>
             <MemberDetails
                 member={member}
-                totalContribution={totalContribution}
+                contributions={contributions}
             />
         </Container>
     )
@@ -41,24 +41,20 @@ export const getServerSideProps = async (context) => {
 
     await dbConnect()
 
-    const [member, totalContribution] = await Promise.all([
+    const [member, contributions] = await Promise.all([
         Member.findById(memberId)
             .populate('parents', 'firstName lastName')
             .populate('children', 'firstName lastName')
             .lean(),
-        Contribution.aggregate([
-            { $match: { contributor: new mongoose.Types.ObjectId(memberId) } },
-            { $group: { _id: null, totalAmount: { $sum: '$amount' } } }
-        ])
+        Contribution.find({contributor: memberId}).lean(),
     ])
     delete member.password
     
     return {
         props: {
             member: JSON.parse(JSON.stringify(member)),
-            totalContribution: !!totalContribution.length 
-                ? totalContribution[0].totalAmount
-                : 0
+            contributions: JSON.parse(JSON.stringify(contributions)),
+           
         }
     }
 }
