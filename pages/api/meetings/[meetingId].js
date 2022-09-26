@@ -22,7 +22,7 @@ const handler = async (req, res) => {
                 if (!meeting) return res.status(400).json({ success: false, message: `Unable to find meeting with id ${meetingId}` })
                 res.status(200).json({ success: true, data: meeting })
             } catch (error) {
-                res.status(400).json({ success: false, message: error.response.data })
+                res.status(400).json({ success: false, message: error.message })
             }
             break;
 
@@ -32,7 +32,7 @@ const handler = async (req, res) => {
                 if (!deletedMeeting) return res.status(400).json({ success: false, message: `Unable to find meeting with id ${meetingId}` })
                 res.status(200).json({ success: true })
             } catch (error) {
-                res.status(400).json({ success: false, message: error.response.data })
+                res.status(400).json({ success: false, message: error.message })
             }
             break;
 
