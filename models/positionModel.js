@@ -1,0 +1,20 @@
+import mongoose from 'mongoose'
+const {Schema} = mongooose
+
+const positionModel = new Schema({
+    label: {
+        type: String
+    },
+    adjunct: {
+        type: Boolean,
+        default: false
+    },
+    appointee: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Member'
+    }
+}, {
+    timestamps: true
+})
+
+export default mongoose.models.Position || mongoose.model('Position', positionModel)
