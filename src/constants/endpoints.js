@@ -12,5 +12,8 @@ export const ENDPOINTS = {
     editGeneration: (generationId) => `/api/generations/${generationId}`,
 
     addAgendaItem: '/api/agendaitems',
-    editAgendaItem: (agendaItemId) => `/api/agendaitems/${agendaItemId}`
+    editAgendaItem: (agendaItemId) => `/api/agendaitems/${agendaItemId}`,
+
+    addPosition: '/api/positions',
+    editPosition: (positionId) => `/api/positions/${positionId}`,
 }
