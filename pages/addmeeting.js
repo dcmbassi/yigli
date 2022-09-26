@@ -5,7 +5,7 @@ import AddMeetingForm from '../components/forms/AddMeetingForm'
 import dbConnect from '../db/connect'
 import Meta from '../layouts/Meta'
 
-const addmeeting = ({members}) => {
+const AddMeetingPage = ({members}) => {
     const desc = 'Définir la date, le lieu et les hôtes de la prochaine réunion'
     
     return (
@@ -28,4 +28,4 @@ export const getServerSideProps = async () => {
     }
 }
 
-export default addmeeting
+export default AddMeetingPage

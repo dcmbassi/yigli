@@ -6,7 +6,7 @@ import AddContributionForm from '../components/forms/AddContributionForm'
 import Meta from '../layouts/Meta'
 
 
-const addcontribution = ({members}) => {
+const AddContributionPage = ({members}) => {
     return (
         <Container>
             <Meta title='Nouvelle contribution' description='Ajouter une nouvelle contribution' />
@@ -28,4 +28,4 @@ export const getServerSideProps = async () => {
   }
   
 
-export default addcontribution
+export default AddContributionPage

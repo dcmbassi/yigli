@@ -1,8 +1,8 @@
-import Container from '@mui/material/Container';
-import AddMemberForm from '../components/forms/AddMemberForm';
-import Meta from '../layouts/Meta';
+import Container from '@mui/material/Container'
+import AddMemberForm from '../components/forms/AddMemberForm'
+import Meta from '../layouts/Meta'
 
-const addmember = () => {
+const AddMemberPage = () => {
     const desc = 'Ajouter un membre à l\'effectif'
     return (
         <Container>
@@ -12,4 +12,4 @@ const addmember = () => {
     )
 }
 
-export default addmember
+export default AddMemberPage
