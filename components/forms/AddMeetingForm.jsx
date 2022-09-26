@@ -64,7 +64,7 @@ const AddMeetingForm = ({members}) => {
                 resetFields()
             }
         } catch (error) {
-            
+            console.log(error)
         }
     }
 
