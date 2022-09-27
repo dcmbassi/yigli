@@ -66,10 +66,13 @@ const formatPosition = (code, sex) => {
     }
 }
 
+const formatAdjunct = sex => sex === 'male' ? 'Adjoint' : 'Adjointe'
+
 export {
     extractDate,
     prefillDate,
     formatCurrency,
     addProperty,
-    formatPosition
+    formatPosition,
+    formatAdjunct
 }
