@@ -1,3 +1,5 @@
+import { CODES } from "../constants/positionCodes"
+
 const extractDate = (dateTimeString) => {
     const date = new Date(dateTimeString)
 
@@ -28,9 +30,46 @@ const addProperty = (propName, target, source) => {
     target[propName] = {...source}
 }
 
+const formatPosition = (code, sex) => {
+    let position
+    switch (code) {
+        case CODES.president:
+            position = sex === 'male' ? 'Président' : 'Présidente'
+            return position
+
+        case CODES.treasurer:
+            position = sex === 'male' ? 'Trésorier' : 'Trésorière'
+            return position
+
+        case CODES.secretary:
+            position = 'Secrétaire'
+            return position
+
+        case CODES.commOfficer:
+            position = sex === 'male' ? 'Chargé de communication' : 'Chargée de communication'
+            return position
+
+        case CODES.prayerOfficer:
+            position = sex === 'male' ? 'Chargé de prière' : 'Chargée de prière'
+            return position
+
+        case CODES.auditor:
+            position = 'Commissaire aux comptes'
+            return position
+
+        case CODES.censor:
+            position = 'Censeur'
+            return position
+    
+        default:
+            return 'unknown'
+    }
+}
+
 export {
     extractDate,
     prefillDate,
     formatCurrency,
-    addProperty
+    addProperty,
+    formatPosition
 }
