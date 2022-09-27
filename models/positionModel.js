@@ -5,6 +5,9 @@ const positionModel = new Schema({
     label: {
         type: String
     },
+    code: {
+        type: String
+    },
     adjunct: {
         type: Boolean,
         default: false
